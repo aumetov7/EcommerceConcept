@@ -10,11 +10,12 @@ import SwiftUI
 struct CategoryView: View {
     @ObservedObject var categoryVM: CategoryViewModel
     
+    let width: CGFloat
     let height: CGFloat
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
+            HStack(spacing: 22) {
                 ForEach(0 ..< 5) { index in
                     Button {
                         categoryVM.selectItem(index: index)
@@ -25,9 +26,10 @@ struct CategoryView: View {
                                     .foregroundColor(categoryVM.category.states[index] ? Color("Orange") : Color.white)
                                 
                                 Image(categoryVM.category.icons[index])
-                                    .resizedToFill(width: 0, height: 35)
+                                    .resizedToFill(width: 0, height: 30)
                                     .foregroundColor(categoryVM.category.states[index] ? Color.white : Color("CategoryColor"))
                             }
+                            .frame(width: width)
                             
                             Text(categoryVM.category.names[index])
                                 .foregroundColor(categoryVM.category.states[index] ? Color("Orange") : Color.black)
@@ -36,16 +38,17 @@ struct CategoryView: View {
                                 .fixedSize()
                         }
                     }
+                    .frame(height: height)
                 }
             }
+            .padding(.horizontal)
+            .padding(.horizontal)
         }
-        .frame(height: height)
-        .background(Color.gray)
     }
 }
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView(categoryVM: CategoryViewModel(), height: 100)
+        CategoryView(categoryVM: CategoryViewModel(), width: 71, height: 100)
     }
 }

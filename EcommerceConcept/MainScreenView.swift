@@ -33,8 +33,9 @@ struct MainScreenView: View {
                     }
                     .padding(.horizontal)
                     
-                    CategoryView(categoryVM: categoryVM, height: geometry.size.height * 0.14)
-                        .padding(.horizontal)
+                    CategoryView(categoryVM: categoryVM,
+                                 width: geometry.size.width * 0.17,
+                                 height: geometry.size.height * 0.12)
                     
                     SearchBarView(searchText: $searchText)
                         .padding([.horizontal, .top])
@@ -81,5 +82,8 @@ struct MainScreenView: View {
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenView()
+        
+        MainScreenView()
+            .previewDevice("iPhone SE (3rd generation)")
     }
 }
