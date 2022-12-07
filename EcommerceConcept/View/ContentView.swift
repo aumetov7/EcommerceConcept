@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var productVM: ProductViewModel
+    
     var body: some View {
-        MainScreenView()
+        MainScreenView(productVM: productVM)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(productVM: ProductViewModel())
         
-        ContentView()
+        ContentView(productVM: ProductViewModel())
             .previewDevice("iPhone SE (3rd generation)")
     }
 }

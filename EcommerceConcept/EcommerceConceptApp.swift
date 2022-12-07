@@ -9,21 +9,14 @@ import SwiftUI
 
 @main
 struct EcommerceConceptApp: App {
-    @State private var showLaunchScreen = true
+    @StateObject private var productVM = ProductViewModel()
     
     var body: some Scene {
         WindowGroup {
-            if showLaunchScreen {
+            if !productVM.imageParseDone {
                 LaunchScreen()
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            withAnimation {
-                                showLaunchScreen = false
-                            }
-                        }
-                    }
             } else {
-                ContentView()
+                ContentView(productVM: productVM)
             }
         }
     }
