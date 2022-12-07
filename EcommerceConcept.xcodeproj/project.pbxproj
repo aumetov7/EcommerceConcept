@@ -11,6 +11,17 @@
 		D8F693C2293F5AD70025FEE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693C1293F5AD70025FEE6 /* ContentView.swift */; };
 		D8F693C4293F5ADB0025FEE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8F693C3293F5ADB0025FEE6 /* Assets.xcassets */; };
 		D8F693C7293F5ADB0025FEE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8F693C6293F5ADB0025FEE6 /* Preview Assets.xcassets */; };
+		D8F693D2293F5C920025FEE6 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693D1293F5C920025FEE6 /* LaunchScreen.swift */; };
+		D8F693D4293F5DA30025FEE6 /* Mark Pro Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F693D3293F5DA30025FEE6 /* Mark Pro Medium.ttf */; };
+		D8F693D6293F5DAC0025FEE6 /* Mark Pro Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F693D5293F5DAC0025FEE6 /* Mark Pro Heavy.ttf */; };
+		D8F693D8293F5DB60025FEE6 /* Mark Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F693D7293F5DB60025FEE6 /* Mark Pro.ttf */; };
+		D8F693DA293F5DC00025FEE6 /* Mark Pro Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F693D9293F5DC00025FEE6 /* Mark Pro Bold.ttf */; };
+		D8F693DE293F675F0025FEE6 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693DD293F675F0025FEE6 /* MainScreenView.swift */; };
+		D8F693E2293F700D0025FEE6 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693E1293F700D0025FEE6 /* ImageExtension.swift */; };
+		D8F693E4293F77E80025FEE6 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693E3293F77E80025FEE6 /* CategoryView.swift */; };
+		D8F693E6293F87AC0025FEE6 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693E5293F87AC0025FEE6 /* Category.swift */; };
+		D8F693E8293F88300025FEE6 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693E7293F88300025FEE6 /* CategoryViewModel.swift */; };
+		D8F693EA293F8BCE0025FEE6 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693E9293F8BCE0025FEE6 /* SearchBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +30,18 @@
 		D8F693C1293F5AD70025FEE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D8F693C3293F5ADB0025FEE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8F693C6293F5ADB0025FEE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D8F693D0293F5BAC0025FEE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D8F693D1293F5C920025FEE6 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		D8F693D3293F5DA30025FEE6 /* Mark Pro Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark Pro Medium.ttf"; sourceTree = "<group>"; };
+		D8F693D5293F5DAC0025FEE6 /* Mark Pro Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark Pro Heavy.ttf"; sourceTree = "<group>"; };
+		D8F693D7293F5DB60025FEE6 /* Mark Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark Pro.ttf"; sourceTree = "<group>"; };
+		D8F693D9293F5DC00025FEE6 /* Mark Pro Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark Pro Bold.ttf"; sourceTree = "<group>"; };
+		D8F693DD293F675F0025FEE6 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		D8F693E1293F700D0025FEE6 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		D8F693E3293F77E80025FEE6 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		D8F693E5293F87AC0025FEE6 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		D8F693E7293F88300025FEE6 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		D8F693E9293F8BCE0025FEE6 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +74,17 @@
 		D8F693BE293F5AD70025FEE6 /* EcommerceConcept */ = {
 			isa = PBXGroup;
 			children = (
+				D8F693D0293F5BAC0025FEE6 /* Info.plist */,
 				D8F693BF293F5AD70025FEE6 /* EcommerceConceptApp.swift */,
+				D8F693D1293F5C920025FEE6 /* LaunchScreen.swift */,
 				D8F693C1293F5AD70025FEE6 /* ContentView.swift */,
+				D8F693DD293F675F0025FEE6 /* MainScreenView.swift */,
+				D8F693E3293F77E80025FEE6 /* CategoryView.swift */,
+				D8F693E9293F8BCE0025FEE6 /* SearchBarView.swift */,
+				D8F693E5293F87AC0025FEE6 /* Category.swift */,
+				D8F693E7293F88300025FEE6 /* CategoryViewModel.swift */,
+				D8F693E1293F700D0025FEE6 /* ImageExtension.swift */,
+				D8F693CF293F5B7C0025FEE6 /* Fonts */,
 				D8F693C3293F5ADB0025FEE6 /* Assets.xcassets */,
 				D8F693C5293F5ADB0025FEE6 /* Preview Content */,
 			);
@@ -65,6 +97,17 @@
 				D8F693C6293F5ADB0025FEE6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D8F693CF293F5B7C0025FEE6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D8F693D9293F5DC00025FEE6 /* Mark Pro Bold.ttf */,
+				D8F693D7293F5DB60025FEE6 /* Mark Pro.ttf */,
+				D8F693D5293F5DAC0025FEE6 /* Mark Pro Heavy.ttf */,
+				D8F693D3293F5DA30025FEE6 /* Mark Pro Medium.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +168,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8F693DA293F5DC00025FEE6 /* Mark Pro Bold.ttf in Resources */,
+				D8F693D8293F5DB60025FEE6 /* Mark Pro.ttf in Resources */,
 				D8F693C7293F5ADB0025FEE6 /* Preview Assets.xcassets in Resources */,
+				D8F693D4293F5DA30025FEE6 /* Mark Pro Medium.ttf in Resources */,
 				D8F693C4293F5ADB0025FEE6 /* Assets.xcassets in Resources */,
+				D8F693D6293F5DAC0025FEE6 /* Mark Pro Heavy.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +185,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8F693C2293F5AD70025FEE6 /* ContentView.swift in Sources */,
+				D8F693EA293F8BCE0025FEE6 /* SearchBarView.swift in Sources */,
+				D8F693E4293F77E80025FEE6 /* CategoryView.swift in Sources */,
+				D8F693E2293F700D0025FEE6 /* ImageExtension.swift in Sources */,
 				D8F693C0293F5AD70025FEE6 /* EcommerceConceptApp.swift in Sources */,
+				D8F693E8293F88300025FEE6 /* CategoryViewModel.swift in Sources */,
+				D8F693D2293F5C920025FEE6 /* LaunchScreen.swift in Sources */,
+				D8F693DE293F675F0025FEE6 /* MainScreenView.swift in Sources */,
+				D8F693E6293F87AC0025FEE6 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +324,7 @@
 				DEVELOPMENT_TEAM = W8E6UD5535;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EcommerceConcept/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +354,7 @@
 				DEVELOPMENT_TEAM = W8E6UD5535;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EcommerceConcept/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
