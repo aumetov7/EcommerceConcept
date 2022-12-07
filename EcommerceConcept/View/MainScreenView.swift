@@ -9,10 +9,10 @@ import SwiftUI
 
 struct MainScreenView: View {
     @StateObject private var categoryVM = CategoryViewModel()
-//    @StateObject private var productVM = ProductViewModel()
     @ObservedObject var productVM: ProductViewModel
     
     @State private var searchText = ""
+    @State private var showMenu = false
     
     @ViewBuilder
     func categoryTitle(title: String, buttonLabel: String) -> some View {
@@ -37,37 +37,12 @@ struct MainScreenView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        categoryTitle(title: "Select Category", buttonLabel: "view all")
-                        .padding(.horizontal)
-                        
-                        CategoryView(categoryVM: categoryVM,
-                                     width: geometry.size.width * 0.17,
-                                     height: geometry.size.height * 0.12)
-                        
-                        SearchBarView(searchText: $searchText)
-                            .padding()
-                        
-                        categoryTitle(title: "Hot Sales", buttonLabel: "see more")
-                        .padding(.horizontal)
-                        
-                        CarouselView(productData: productVM.product.homeStore,
-                                     pictureData: productVM.hotSalesPicture.picture,
-                                     width: geometry.size.width,
-                                     height: geometry.size.height)
-                        
-                        categoryTitle(title: "Best Seller", buttonLabel: "see more")
-                            .padding(.horizontal)
-                        
-                        BestSellerView(productData: productVM.product.bestSeller,
-                                       pictureData: productVM.bestSellerPicture.picture,
-                                       width: geometry.size.width,
-                                       height: geometry.size.height)
-                        .padding(.bottom)
-                        
-                        BottomBarView(width: geometry.size.width, height: geometry.size.height)
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
+                        HStack {
+                            Spacer()
+                                .overlay(alignment: .leading) {
+                                    EmptyView()
+                                }
+                            
                             Button {
                                 // Location action
                             } label: {
@@ -85,19 +60,61 @@ struct MainScreenView: View {
                                         .foregroundColor(.black.opacity(0.2))
                                 }
                             }
+                            
+                            Spacer()
+                                .overlay(alignment: .trailing) {
+                                    Button {
+                                        showMenu.toggle()
+                                    } label: {
+                                        Image("filterIcon")
+                                            .resizedToFill(width: geometry.size.width * 0.02,
+                                                           height: geometry.size.height * 0.02)
+                                            .padding([.leading, .top, .bottom], 8)
+                                            .background {
+                                                Circle()
+                                                    .foregroundColor(.clear)
+                                            }
+                                    }
+                                }
                         }
+                        .padding(.horizontal)
+                        .padding(.bottom, 8)
                         
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                // Filter action
-                            } label: {
-                                Image("filterIcon")
-                                    .resizedToFill(width: geometry.size.width * 0.02,
-                                                   height: geometry.size.height * 0.02)
-                            }
-                        }
+                        categoryTitle(title: "Select Category", buttonLabel: "view all")
+                            .padding(.horizontal)
+                        
+                        CategoryView(categoryVM: categoryVM,
+                                     width: geometry.size.width * 0.17,
+                                     height: geometry.size.height * 0.12)
+                        
+                        SearchBarView(searchText: $searchText)
+                            .padding()
+                        
+                        categoryTitle(title: "Hot Sales", buttonLabel: "see more")
+                            .padding(.horizontal)
+                        
+                        CarouselView(productData: productVM.product.homeStore,
+                                     pictureData: productVM.hotSalesPicture.picture,
+                                     width: geometry.size.width,
+                                     height: geometry.size.height)
+                        
+                        categoryTitle(title: "Best Seller", buttonLabel: "see more")
+                            .padding(.horizontal)
+                        
+                        BestSellerView(productData: productVM.product.bestSeller,
+                                       pictureData: productVM.bestSellerPicture.picture,
+                                       width: geometry.size.width,
+                                       height: geometry.size.height)
+                        .padding(.bottom)
+                        
+                        BottomBarView(width: geometry.size.width, height: geometry.size.height)
                     }
-                .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .halfSheet(showSheet: $showMenu) {
+                        FilterView(height: geometry.size.height)
+                    } onEnd: {
+                        print("Dismiss")
+                    }
                 }
                 .gesture(DragGesture()
                     .onChanged({ _ in
@@ -126,5 +143,17 @@ struct MainScreenView_Previews: PreviewProvider {
 extension UIApplication {
     func dismissKeyboard() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+extension View {
+    func halfSheet<SheetView: View> (showSheet: Binding<Bool>,
+                                     @ViewBuilder sheetView: @escaping () -> SheetView,
+                                     onEnd: @escaping () -> ()) -> some View {
+        
+        return self
+            .background(
+                HalfSheetHelper(sheetView: sheetView(), onEnd: onEnd, showSheet: showSheet)
+            )
     }
 }

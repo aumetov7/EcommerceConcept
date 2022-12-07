@@ -59,7 +59,7 @@ class CustomHostingController<Content: View>: UIHostingController<Content> {
                 .medium()
             ]
             
-            presentationController.prefersGrabberVisible = true
+            presentationController.prefersGrabberVisible = false
         }
     }
 }
