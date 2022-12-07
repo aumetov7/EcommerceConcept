@@ -12,17 +12,20 @@ import UIKit
 class ProductViewModel: ObservableObject {
 //    @Published var product = Product.product
     @Published var product = Product(homeStore: [HomeStore(id: 1, isNew: true, title: "", subtitle: "", picture: "", isBuy: false)], bestSeller: [])
-    @Published var picture = Picture(picture: [:])
+    @Published var hotSalesPicture = Picture(picture: [:])
+    @Published var bestSellerPicture = Picture(picture: [:])
     @Published var imageParseDone = false
     
     private var productSubscriber = Set<AnyCancellable>()
-    private var imageSubscriber = Set<AnyCancellable>()
+    private var hotSalesSubscriber = Set<AnyCancellable>()
+    private var bestSellerSubscriber = Set<AnyCancellable>()
     
     init() {
         getProduct(url: productURL)
     }
     
     func getProduct(url: URL) {
+        let dispatchGroup = DispatchGroup()
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
@@ -44,12 +47,27 @@ class ProductViewModel: ObservableObject {
                 self?.product = product
                 
                 for images in product.homeStore {
+                    dispatchGroup.enter()
+                    
                     self!.getProductImages(url: URL(string: images.picture)!) { image in
-                        self?.picture.picture[images.id] = image
+                        self?.hotSalesPicture.picture[images.id] = image
                     }
+                    dispatchGroup.leave()
                 }
                 
-//                self!.imageParseDone = true
+                for images in product.bestSeller {
+                    dispatchGroup.enter()
+                    
+                    self!.getProductImagess(url: URL(string: images.picture)!) { image in
+                        self?.bestSellerPicture.picture[images.id] = image
+                    }
+                    
+                    dispatchGroup.leave()
+                }
+                
+                dispatchGroup.notify(queue: .main) {
+                    self!.imageParseDone = true
+                }
             }
             .store(in: &productSubscriber)
     }
@@ -83,7 +101,26 @@ extension ProductViewModel {
                     break
                 }
             }, receiveValue: completionHandler)
-            .store(in: &imageSubscriber)
+            .store(in: &hotSalesSubscriber)
+    }
+    
+    func getProductImagess(url: URL, completionHandler: @escaping (UIImage?) -> ()) {
+        URLSession
+            .shared
+            .dataTaskPublisher(for: url)
+            .receive(on: DispatchQueue.main)
+            .map(handleImageResponse)
+            .eraseToAnyPublisher()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Image Error: \(error.localizedDescription)")
+                default:
+                    print("Image done")
+                    break
+                }
+            }, receiveValue: completionHandler)
+            .store(in: &bestSellerSubscriber)
     }
     
     func handleImageResponse(data: Data?, response: URLResponse?) -> UIImage? {

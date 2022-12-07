@@ -51,9 +51,20 @@ struct MainScreenView: View {
                         .padding(.horizontal)
                         
                         CarouselView(productData: productVM.product.homeStore,
-                                     pictureData: productVM.picture.picture,
+                                     pictureData: productVM.hotSalesPicture.picture,
                                      width: geometry.size.width,
                                      height: geometry.size.height)
+                        
+                        categoryTitle(title: "Best Seller", buttonLabel: "see more")
+                            .padding(.horizontal)
+                        
+                        BestSellerView(productData: productVM.product.bestSeller,
+                                       pictureData: productVM.bestSellerPicture.picture,
+                                       width: geometry.size.width,
+                                       height: geometry.size.height)
+                        .padding(.bottom)
+                        
+                        BottomBarView(width: geometry.size.width, height: geometry.size.height)
                     }
                     .toolbar {
                         ToolbarItem(placement: .principal) {

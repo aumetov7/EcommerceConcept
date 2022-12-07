@@ -21,7 +21,7 @@ struct HomeStore: Decodable, Identifiable {
     let isBuy: Bool
 }
 
-struct BestSeller: Decodable {
+struct BestSeller: Decodable, Identifiable {
     let id: Int
     let isFavorites: Bool
     let title: String
