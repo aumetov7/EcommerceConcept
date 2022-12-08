@@ -35,7 +35,6 @@ struct FilterMenuView: View {
                 .overlay(content: {
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(Color.gray, lineWidth: 1)
-                        .foregroundColor(.clear)
                 })
                 .padding(.bottom)
             } expandedView: {

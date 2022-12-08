@@ -69,7 +69,7 @@ struct MainScreenView: View {
                                         Image("filterIcon")
                                             .resizedToFill(width: geometry.size.width * 0.02,
                                                            height: geometry.size.height * 0.02)
-                                            .padding([.leading, .top, .bottom], 8)
+                                            .padding(8)
                                             .background {
                                                 Circle()
                                                     .foregroundColor(.clear)
@@ -111,9 +111,10 @@ struct MainScreenView: View {
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .halfSheet(showSheet: $showMenu) {
-                        FilterView(height: geometry.size.height)
+                        FilterView(showMenu: $showMenu, width: geometry.size.width, height: geometry.size.height)
                     } onEnd: {
                         print("Dismiss")
+                        print("\(showMenu)")
                     }
                 }
                 .gesture(DragGesture()

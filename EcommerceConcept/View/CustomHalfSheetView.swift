@@ -47,7 +47,6 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
             parent.onEnd()
         }
     }
-    
 }
 
 class CustomHostingController<Content: View>: UIHostingController<Content> {
