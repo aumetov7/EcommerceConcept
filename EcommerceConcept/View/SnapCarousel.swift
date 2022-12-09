@@ -22,23 +22,25 @@ struct SnapCarousel: View {
                      spacing: width * 0.08,
                      widthOfHiddenCards: width * 0.1) {
                 ForEach(product.product.basket, id: \.self.id) { item in
-                    Item(
-                        _id: Int(item.id - 1),
-                        spacing: width * 0.08,
-                        widthOfHiddenCards: width * 0.1,
-                        cardHeight: height * 0.42
-                    ) {
-                        Image(uiImage: product.picture.picture[item.id] ?? UIImage())
-                            .resizedToFill(width: width * 0.7,
-                                           height: height * 0.4)
-                            .clipped()
+                    VStack {
+                        Item(
+                            _id: Int(item.id - 1),
+                            spacing: width * 0.07,
+                            widthOfHiddenCards: width * 0.1,
+                            cardHeight: height * 0.42
+                        ) {
+                            Image(uiImage: product.picture.picture[item.id] ?? UIImage())
+                                .resizedToFill(width: item.id - 1 == uiState.activeCard ? width * 0.7 : width * 0.6,
+                                               height: item.id - 1 == uiState.activeCard ? height * 0.4 : height * 0.3)
+                                .clipped()
+                        }
+                        .foregroundColor(Color.white)
+                        .background(Color(.white))
+                        .cornerRadius(20)
+                        .shadow(color: Color(.black).opacity(0.2), radius: 4, x: 0, y: 4)
+                        .transition(AnyTransition.slide)
+                        .animation(.spring(), value: UUID())
                     }
-                    .foregroundColor(Color.white)
-                    .background(Color(.white))
-                    .cornerRadius(20)
-                    .shadow(color: Color(.black).opacity(0.2), radius: 4, x: 0, y: 4)
-                    .transition(AnyTransition.slide)
-                    .animation(.spring(), value: UUID())
                 }
             }
         }

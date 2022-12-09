@@ -10,5 +10,4 @@ import Foundation
 struct Category {
     let icons = ["phoneIcon", "computerIcon", "healthIcon", "booksIcon", ""]
     let names = ["Phones", "Computer", "Health", "Books", "Tools"]
-    var states = [true, false, false, false, false]
 }

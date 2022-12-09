@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BestSellerView: View {
+    @Binding var showProductDetails: Bool
+    
     var productData: [BestSeller]
     var pictureData: [Int: UIImage]
     
@@ -19,7 +21,8 @@ struct BestSellerView: View {
     var body: some View {
         LazyVGrid(columns: columns) {
             ForEach(productData, id: \.id) { product in
-                BestSellerBlockView(bestSeller: product,
+                BestSellerBlockView(showProductDetails: $showProductDetails,
+                                    bestSeller: product,
                                     image: pictureData[product.id] ?? UIImage(),
                                     width: width,
                                     height: height)
@@ -31,7 +34,8 @@ struct BestSellerView: View {
 
 struct BestSellerView_Previews: PreviewProvider {
     static var previews: some View {
-        BestSellerView(productData: [BestSeller(id: 1,
+        BestSellerView(showProductDetails: .constant(false),
+                       productData: [BestSeller(id: 1,
                                                 isFavorites: true,
                                                 title: "Samsung Galaxy s20 Ultra",
                                                 priceWithoutDiscount: 1500,

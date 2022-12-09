@@ -8,59 +8,69 @@
 import SwiftUI
 
 struct BestSellerBlockView: View {
+    @Binding var showProductDetails: Bool
+    
     let bestSeller: BestSeller
     let image: UIImage
     let width: CGFloat
     let height: CGFloat
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
-            
-            ZStack(alignment: .topTrailing) {
-                VStack(alignment: .leading) {
-                    Image(uiImage: image)
-                        .resizedToFill(width: width * 0.4, height: height * 0.3)
-                        .clipped()
-                    
-                    HStack(alignment: .bottom) {
-                        Text("$\(bestSeller.discountPrice)")
-                            .font(.custom("MarkPro-Bold", size: 16))
-                        
-                        Text("$\(bestSeller.priceWithoutDiscount)")
-                            .font(.custom("MarkPro-Medium", size: 10))
-                            .strikethrough()
-                            .foregroundColor(.gray)
-                    }
-                    
-                    Text(bestSeller.title)
-                        .font(.custom("MarkPro", size: 10))
-                }
-                .padding(.bottom)
+        Button {
+            showProductDetails.toggle()
+        } label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.white)
                 
-                Button {
-                    // add to favourites action
-                } label: {
-                    Image(systemName: "heart")
-                        .font(.caption)
-                        .foregroundColor(Color("Orange"))
-                        .padding(8)
-                        .background {
-                            Circle()
-                                .foregroundColor(Color.white)
+                ZStack(alignment: .topTrailing) {
+                    VStack(alignment: .leading) {
+                        Image(uiImage: image)
+                            .resizedToFill(width: width * 0.4, height: height * 0.3)
+                            .clipped()
+                        
+                        HStack(alignment: .bottom) {
+                            Text("$\(bestSeller.discountPrice)")
+                                .font(.custom("MarkPro-Bold", size: 16))
+                                .foregroundColor(.black)
+                            
+                            Text("$\(bestSeller.priceWithoutDiscount)")
+                                .font(.custom("MarkPro-Medium", size: 10))
+                                .strikethrough()
+                                .foregroundColor(.gray)
                         }
-                        .padding(.top)
-                }
+                        
+                        Text(bestSeller.title)
+                            .font(.custom("MarkPro", size: 10))
+                            .foregroundColor(.black)
+                    }
+                    .padding(.bottom)
+                    
+                    Button {
+                        // add to favourites action
+                    } label: {
+                        Image(systemName: "heart")
+                            .font(.caption)
+                            .foregroundColor(Color("Orange"))
+                            .padding(8)
+                            .background {
+                                Circle()
+                                    .foregroundColor(Color.white)
+                            }
+                            .padding(.top)
+                    }
 
+                }
             }
         }
+
     }
 }
 
 struct BestSellerBlockView_Previews: PreviewProvider {
     static var previews: some View {
-        BestSellerBlockView(bestSeller: BestSeller(id: 1,
+        BestSellerBlockView(showProductDetails: .constant(false),
+                            bestSeller: BestSeller(id: 1,
                                                    isFavorites: true,
                                                    title: "Samsung Galaxy s20 Ultra",
                                                    priceWithoutDiscount: 1500,

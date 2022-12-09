@@ -18,21 +18,21 @@ struct CategoryView: View {
             HStack(spacing: 22) {
                 ForEach(0 ..< 5) { index in
                     Button {
-                        categoryVM.selectItem(index: index)
+                        categoryVM.buttonSelected = index
                     } label: {
                         VStack {
                             ZStack {
                                 Circle()
-                                    .foregroundColor(categoryVM.category.states[index] ? Color("Orange") : Color.white)
+                                    .foregroundColor(categoryVM.buttonSelected == index ? Color("Orange") : Color.white)
                                 
                                 Image(categoryVM.category.icons[index])
                                     .resizedToFill(width: 0, height: 30)
-                                    .foregroundColor(categoryVM.category.states[index] ? Color.white : Color("CategoryColor"))
+                                    .foregroundColor(categoryVM.buttonSelected == index ? Color.white : Color("CategoryColor"))
                             }
                             .frame(width: width)
                             
                             Text(categoryVM.category.names[index])
-                                .foregroundColor(categoryVM.category.states[index] ? Color("Orange") : Color.black)
+                                .foregroundColor(categoryVM.buttonSelected == index ? Color("Orange") : Color.black)
                                 .font(.custom("MarkPro-Medium", size: 12))
                                 .lineLimit(1)
                                 .fixedSize()

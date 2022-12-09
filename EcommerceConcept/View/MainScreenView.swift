@@ -13,6 +13,7 @@ struct MainScreenView: View {
     
     @State private var searchText = ""
     @State private var showMenu = false
+    @State private var showProductDetails = false
     
     @ViewBuilder
     func categoryTitle(title: String, buttonLabel: String) -> some View {
@@ -37,6 +38,10 @@ struct MainScreenView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
+                        NavigationLink(destination: ProductDetailsView(), isActive: $showProductDetails) {
+                            EmptyView()
+                        }
+                        
                         HStack {
                             Spacer()
                                 .overlay(alignment: .leading) {
@@ -101,7 +106,8 @@ struct MainScreenView: View {
                         categoryTitle(title: "Best Seller", buttonLabel: "see more")
                             .padding(.horizontal)
                         
-                        BestSellerView(productData: productVM.product.bestSeller,
+                        BestSellerView(showProductDetails: $showProductDetails,
+                                       productData: productVM.product.bestSeller,
                                        pictureData: productVM.bestSellerPicture.picture,
                                        width: geometry.size.width,
                                        height: geometry.size.height)
@@ -129,6 +135,7 @@ struct MainScreenView: View {
             .background(Color("BackgroundColor"))
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
+        .environmentObject(UIStateViewModel())
     }
 }
 
