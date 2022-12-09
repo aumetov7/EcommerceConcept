@@ -31,9 +31,9 @@ class ProductDetailsViewModel: ObservableObject {
             .sink { completion in
                 switch completion {
                 case .failure(let error):
-                    print("Product error: \(error.localizedDescription)")
+                    print("Product Details error: \(error.localizedDescription)")
                 default:
-                    print("Product done")
+                    print("Product Details done")
                     break
                 }
             } receiveValue: { [weak self] product in

@@ -74,16 +74,11 @@ struct MainScreenView: View {
                                         Image("filterIcon")
                                             .resizedToFill(width: geometry.size.width * 0.02,
                                                            height: geometry.size.height * 0.02)
-                                            .padding(8)
-                                            .background {
-                                                Circle()
-                                                    .foregroundColor(.clear)
-                                            }
+                                            .contentShape(Rectangle())
                                     }
                                 }
                         }
-                        .padding(.horizontal)
-                        .padding(.bottom, 8)
+                        .padding()
                         
                         categoryTitle(title: "Select Category", buttonLabel: "view all")
                             .padding(.horizontal)
@@ -113,7 +108,6 @@ struct MainScreenView: View {
                                        height: geometry.size.height)
                         .padding(.bottom)
                         
-                        BottomBarView(width: geometry.size.width, height: geometry.size.height)
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .halfSheet(showSheet: $showMenu) {
@@ -122,6 +116,13 @@ struct MainScreenView: View {
                         print("Dismiss")
                         print("\(showMenu)")
                     }
+                    .toolbar {
+                        ToolbarItem(placement: .bottomBar) {
+                            BottomBarView(width: geometry.size.width, height: geometry.size.height)
+                                .frame(maxHeight: .infinity, alignment: .bottom)
+                        }
+                    }
+                    .padding(.bottom)
                 }
                 .gesture(DragGesture()
                     .onChanged({ _ in
@@ -131,6 +132,7 @@ struct MainScreenView: View {
                     .onEnded({ _ in
                         UIApplication.shared.dismissKeyboard()
                     }))
+                .clipped()
             }
             .background(Color("BackgroundColor"))
             .ignoresSafeArea(.keyboard, edges: .bottom)
