@@ -14,6 +14,8 @@ struct ProductDetailsView: View {
     
     @StateObject private var productDetailsVM = ProductDetailsViewModel()
     
+    @State private var title = ""
+    @State private var price = 0
     @State private var selectedButton = 0
     @State private var colorSelected = 0
     @State private var memorySelected = 0
@@ -29,6 +31,8 @@ struct ProductDetailsView: View {
             GeometryReader { geometry in
                 VStack {
                     SnapCarousel(product: productDetailsVM,
+                                 title: $title,
+                                 price: $price,
                                  width: geometry.size.width,
                                  height: geometry.size.height)
                     .frame(height: geometry.size.height * 0.42)
@@ -41,7 +45,7 @@ struct ProductDetailsView: View {
                         
                         VStack(alignment: .leading) {
                             HStack(alignment: .center) {
-                                Text("Galaxy Note 20 Ultra")
+                                Text(title)
                                     .font(.custom("MarkPro-Medium", size: 24))
                                 
                                 Spacer()
@@ -137,7 +141,6 @@ struct ProductDetailsView: View {
                                             }
                                         }
                                     }
-
                                 }
                                 
                                 Spacer()
@@ -158,7 +161,6 @@ struct ProductDetailsView: View {
                                                     }
                                                 }
                                         }
-
                                     }
                                 }
                             }
@@ -172,8 +174,9 @@ struct ProductDetailsView: View {
                                     
                                     Spacer()
                                     
-                                    Text("$1,500.00")
+                                    Text("$\(price)")
                                 }
+                                .font(.custom("MarkPro-Bold", size: 20))
                                 .padding(16)
                                 .padding(.horizontal)
                                 .foregroundColor(.white)
@@ -182,7 +185,6 @@ struct ProductDetailsView: View {
                                         .foregroundColor(Color("Orange"))
                                 }
                             }
-
                         }
                         .padding(.horizontal)
                         .padding(.horizontal)
@@ -234,6 +236,10 @@ struct ProductDetailsView: View {
             .background(Color("BackgroundColor"))
         }
         .navigationBarBackButtonHidden()
+    }
+    
+    func toString(price: Int) -> String {
+        return "$" + String(price)
     }
 }
 

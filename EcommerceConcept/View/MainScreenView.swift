@@ -70,15 +70,21 @@ struct MainScreenView: View {
                                 .overlay(alignment: .trailing) {
                                     Button {
                                         showMenu.toggle()
+                                        print("Tapped")
                                     } label: {
                                         Image("filterIcon")
-                                            .resizedToFill(width: geometry.size.width * 0.02,
-                                                           height: geometry.size.height * 0.02)
-                                            .contentShape(Rectangle())
+                                            .resizedToFill(width: 15,
+                                                           height: 15)
+                                            .padding([.top, .leading, .bottom], 8)
+                                            .background {
+                                                Rectangle()
+                                                    .foregroundColor(.clear)
+                                            }
                                     }
                                 }
                         }
-                        .padding()
+                        .padding(.horizontal)
+                        .padding(.bottom, 8)
                         
                         categoryTitle(title: "Select Category", buttonLabel: "view all")
                             .padding(.horizontal)
@@ -111,7 +117,9 @@ struct MainScreenView: View {
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .halfSheet(showSheet: $showMenu) {
-                        FilterView(showMenu: $showMenu, width: geometry.size.width, height: geometry.size.height)
+                        FilterView(showMenu: $showMenu,
+                                   width: geometry.size.width,
+                                   height: geometry.size.height)
                     } onEnd: {
                         print("Dismiss")
                         print("\(showMenu)")

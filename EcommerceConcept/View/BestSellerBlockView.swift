@@ -29,7 +29,7 @@ struct BestSellerBlockView: View {
                             .resizedToFill(width: width * 0.4, height: height * 0.3)
                             .clipped()
                         
-                        HStack(alignment: .bottom) {
+                        HStack(alignment: .center) {
                             Text("$\(bestSeller.discountPrice)")
                                 .font(.custom("MarkPro-Bold", size: 16))
                                 .foregroundColor(.black)

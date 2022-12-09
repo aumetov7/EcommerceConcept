@@ -14,9 +14,6 @@ struct ContentView: View {
         // add to favourites action
         
         MainScreenView(productVM: productVM)
-        
-//        ProductDetailsView()
-//            .environmentObject(UIStateViewModel())
     }
 }
 

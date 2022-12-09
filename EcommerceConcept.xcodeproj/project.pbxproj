@@ -105,6 +105,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D8F1183C29437D2200C9033C /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				D8DE82C62940D5F200608129 /* CustomHalfSheetView.swift */,
+				D8DE82CA2940DACA00608129 /* CustomDisclosureGroup.swift */,
+				D8DE82EA29431E4400608129 /* SnapCarousel.swift */,
+				D8DE82EC29432DA400608129 /* UIStateViewModel.swift */,
+				D8DE82EE29432DC200608129 /* Carousel.swift */,
+				D8DE82F029432E0700608129 /* Canvas.swift */,
+				D8DE82F229432E2300608129 /* Item.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		D8F693B3293F5AD70025FEE6 = {
 			isa = PBXGroup;
 			children = (
@@ -169,17 +183,11 @@
 				D8DE82C22940C0AF00608129 /* BestSellerView.swift */,
 				D8DE82C02940BA2E00608129 /* BestSellerBlockView.swift */,
 				D8DE82C42940CE3C00608129 /* BottomBarView.swift */,
-				D8DE82C62940D5F200608129 /* CustomHalfSheetView.swift */,
 				D8DE82C82940D87300608129 /* FilterView.swift */,
 				D8DE82CC2940E00700608129 /* FilterMenuView.swift */,
 				D8DE82D42941F73B00608129 /* RangeSliderView.swift */,
-				D8DE82CA2940DACA00608129 /* CustomDisclosureGroup.swift */,
 				D8DE82DC2942342500608129 /* ProductDetailsView.swift */,
-				D8DE82EA29431E4400608129 /* SnapCarousel.swift */,
-				D8DE82EC29432DA400608129 /* UIStateViewModel.swift */,
-				D8DE82EE29432DC200608129 /* Carousel.swift */,
-				D8DE82F029432E0700608129 /* Canvas.swift */,
-				D8DE82F229432E2300608129 /* Item.swift */,
+				D8F1183C29437D2200C9033C /* CustomViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
