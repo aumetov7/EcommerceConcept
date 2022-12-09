@@ -46,25 +46,22 @@ class ProductViewModel: ObservableObject {
             } receiveValue: { [weak self] product in
                 self?.product = product
                 
+                dispatchGroup.enter()
+                
                 for images in product.homeStore {
-                    dispatchGroup.enter()
-                    
                     self!.getProductImages(url: URL(string: images.picture)!) { image in
                         self?.hotSalesPicture.picture[images.id] = image
                     }
-                    dispatchGroup.leave()
                 }
                 
                 for images in product.bestSeller {
-                    dispatchGroup.enter()
                     
                     self!.getProductImagess(url: URL(string: images.picture)!) { image in
                         self?.bestSellerPicture.picture[images.id] = image
                     }
-                    
-                    dispatchGroup.leave()
                 }
                 
+                dispatchGroup.leave()
                 dispatchGroup.notify(queue: .main) {
                     self!.imageParseDone = true
                 }

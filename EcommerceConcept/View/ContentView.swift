@@ -11,7 +11,12 @@ struct ContentView: View {
     @ObservedObject var productVM: ProductViewModel
     
     var body: some View {
+        // add to favourites action
+        
         MainScreenView(productVM: productVM)
+        
+//        ProductDetailsView()
+//            .environmentObject(UIStateViewModel())
     }
 }
 
