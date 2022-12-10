@@ -9,11 +9,14 @@ import SwiftUI
 
 struct MainScreenView: View {
     @StateObject private var categoryVM = CategoryViewModel()
+    
     @ObservedObject var productVM: ProductViewModel
+    @ObservedObject var productDetailsVM: ProductDetailsViewModel
     
     @State private var searchText = ""
     @State private var showMenu = false
     @State private var showProductDetails = false
+    @State private var showCart = false
     
     @ViewBuilder
     func categoryTitle(title: String, buttonLabel: String) -> some View {
@@ -38,7 +41,11 @@ struct MainScreenView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        NavigationLink(destination: ProductDetailsView(), isActive: $showProductDetails) {
+                        NavigationLink(destination: ProductDetailsView(productDetailsVM: productDetailsVM), isActive: $showProductDetails) {
+                            EmptyView()
+                        }
+                        
+                        NavigationLink(destination: MyCartView(), isActive: $showCart) {
                             EmptyView()
                         }
                         
@@ -55,6 +62,7 @@ struct MainScreenView: View {
                                     Image("locationIcon")
                                         .resizedToFill(width: geometry.size.width * 0.02,
                                                        height: geometry.size.height * 0.02)
+                                        .foregroundColor(Color("Orange"))
                                     
                                     Text("Zihuatanejo, Gro")
                                         .font(.custom("MarkPro-Medium", size: 15))
@@ -126,7 +134,7 @@ struct MainScreenView: View {
                     }
                     .toolbar {
                         ToolbarItem(placement: .bottomBar) {
-                            BottomBarView(width: geometry.size.width, height: geometry.size.height)
+                            BottomBarView(showCart: $showCart, width: geometry.size.width, height: geometry.size.height)
                                 .frame(maxHeight: .infinity, alignment: .bottom)
                         }
                     }
@@ -141,6 +149,7 @@ struct MainScreenView: View {
                         UIApplication.shared.dismissKeyboard()
                     }))
                 .clipped()
+                .environmentObject(CartViewModel())
             }
             .background(Color("BackgroundColor"))
             .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -151,10 +160,8 @@ struct MainScreenView: View {
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenView(productVM: ProductViewModel())
-        
-        MainScreenView(productVM: ProductViewModel())
-            .previewDevice("iPhone SE (3rd generation)")
+        MainScreenView(productVM: ProductViewModel(), productDetailsVM: ProductDetailsViewModel())
+            .environmentObject(CartViewModel())
     }
 }
 

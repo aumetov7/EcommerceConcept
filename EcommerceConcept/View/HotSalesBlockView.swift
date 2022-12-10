@@ -65,6 +65,7 @@ struct HotSalesBlockView: View {
                 Image(uiImage: picture)
                     .resizedToFill(width: width * 0.45, height: height * 0.25)
                     .cornerRadius(10, corners: [.bottomRight, .topRight])
+                    .contentShape(Rectangle())
             }
             .frame(height: height * 0.25)
         }

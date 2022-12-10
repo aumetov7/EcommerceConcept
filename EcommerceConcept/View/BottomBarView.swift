@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BottomBarView: View {
+    @Binding var showCart: Bool
+    
     let width: CGFloat
     let height: CGFloat
     
@@ -29,7 +31,7 @@ struct BottomBarView: View {
                 }
                 
                 Button {
-                    // bag action
+                    showCart.toggle()
                 } label: {
                     Image("bagIcon")
                         .resizedToFill(width: 15, height: 15)
@@ -58,6 +60,6 @@ struct BottomBarView: View {
 
 struct BottomBarView_Previews: PreviewProvider {
     static var previews: some View {
-        BottomBarView(width: 414, height: 896)
+        BottomBarView(showCart: .constant(false), width: 414, height: 896)
     }
 }

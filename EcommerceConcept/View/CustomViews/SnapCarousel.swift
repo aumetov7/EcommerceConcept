@@ -12,6 +12,7 @@ struct SnapCarousel: View {
     
     @ObservedObject var product: ProductDetailsViewModel
     
+    @Binding var itemId: Int
     @Binding var title: String
     @Binding var price: Int
     
@@ -45,12 +46,14 @@ struct SnapCarousel: View {
                         .animation(.spring(), value: UUID())
                         .onAppear {
                             if uiState.activeCard == item.id - 1 {
+                                itemId = item.id
                                 title = item.title
                                 price = item.price
                             }
                         }
                         .onChange(of: uiState.activeCard) { newValue in
                             if uiState.activeCard == item.id - 1 {
+                                itemId = item.id
                                 title = item.title
                                 price = item.price
                             }
@@ -64,7 +67,7 @@ struct SnapCarousel: View {
 
 struct SnapCarousel_Previews: PreviewProvider {
     static var previews: some View {
-        SnapCarousel(product: ProductDetailsViewModel(), title: .constant(""), price: .constant(0), width: 414, height: 896)
+        SnapCarousel(product: ProductDetailsViewModel(), itemId: .constant(1), title: .constant(""), price: .constant(0), width: 414, height: 896)
             .environmentObject(UIStateViewModel())
     }
 }

@@ -10,10 +10,14 @@ import SwiftUI
 struct ProductDetailsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    
     @EnvironmentObject var uiState: UIStateViewModel
+    @EnvironmentObject var cartVM: CartViewModel
     
-    @StateObject private var productDetailsVM = ProductDetailsViewModel()
+    @ObservedObject var productDetailsVM: ProductDetailsViewModel
     
+    @State private var showCart = false
+    @State private var itemId = 1
     @State private var title = ""
     @State private var price = 0
     @State private var selectedButton = 0
@@ -30,7 +34,12 @@ struct ProductDetailsView: View {
         NavigationView {
             GeometryReader { geometry in
                 VStack {
+                    NavigationLink(destination: MyCartView(), isActive: $showCart) {
+                        EmptyView()
+                    }
+                    
                     SnapCarousel(product: productDetailsVM,
+                                 itemId: $itemId,
                                  title: $title,
                                  price: $price,
                                  width: geometry.size.width,
@@ -39,7 +48,8 @@ struct ProductDetailsView: View {
                     .padding()
                     
                     ZStack(alignment: .top) {
-                        RoundedRectangle(cornerRadius: 30)
+                        Rectangle()
+                            .cornerRadius(30, corners: [.topLeft, .topRight])
                             .foregroundColor(.white)
                             .ignoresSafeArea()
                         
@@ -167,7 +177,7 @@ struct ProductDetailsView: View {
                             .padding(.bottom)
                             
                             Button {
-                                // add to cart action
+                                cartVM.addToCart(itemId: itemId)
                             } label: {
                                 HStack(alignment: .center) {
                                     Text("Add to Cart")
@@ -216,22 +226,32 @@ struct ProductDetailsView: View {
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            // bag action
+                            showCart.toggle()
                         } label: {
-                            Image("bagIcon")
-                                .resizedToFill(width: 20, height: 20)
-                                .padding(8)
-                                .foregroundColor(.white)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundColor(Color("Orange"))
-                                        .frame(width: 40, height: 40)
+                            ZStack(alignment: .center) {
+                                Image("bagIcon")
+                                    .resizedToFill(width: 25, height: 25)
+                                    .padding(8)
+                                    .foregroundColor(.white)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .foregroundColor(Color("Orange"))
+                                            .frame(width: 40, height: 40)
+                                    }
+                                
+                                if !cartVM.carts.phone.isEmpty {
+                                    Text("\(cartVM.carts.totalCount)")
+                                        .font(.custom("MarkPro-Medium", size: 18))
+                                        .padding(.top, 4)
+                                        .foregroundColor(Color("DarkPurple"))
                                 }
+                            }
                         }
                         .padding(.trailing)
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
+                .environmentObject(cartVM)
             }
             .background(Color("BackgroundColor"))
         }
@@ -245,7 +265,20 @@ struct ProductDetailsView: View {
 
 struct ProductDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductDetailsView()
+        ProductDetailsView(productDetailsVM: ProductDetailsViewModel())
             .environmentObject(UIStateViewModel())
+            .environmentObject(CartViewModel())
+    }
+}
+
+extension UINavigationController: UIGestureRecognizerDelegate {
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
     }
 }

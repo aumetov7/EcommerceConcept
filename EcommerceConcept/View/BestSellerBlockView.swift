@@ -16,14 +16,14 @@ struct BestSellerBlockView: View {
     let height: CGFloat
     
     var body: some View {
-        Button {
-            showProductDetails.toggle()
-        } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.white)
-                
-                ZStack(alignment: .topTrailing) {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(.white)
+            
+            ZStack(alignment: .topTrailing) {
+                Button(action: {
+                    showProductDetails.toggle()
+                }, label: {
                     VStack(alignment: .leading) {
                         Image(uiImage: image)
                             .resizedToFill(width: width * 0.4, height: height * 0.3)
@@ -44,26 +44,25 @@ struct BestSellerBlockView: View {
                             .font(.custom("MarkPro", size: 10))
                             .foregroundColor(.black)
                     }
-                    .padding(.bottom)
-                    
-                    Button {
-                        // add to favourites action
-                    } label: {
-                        Image(systemName: "heart")
-                            .font(.caption)
-                            .foregroundColor(Color("Orange"))
-                            .padding(8)
-                            .background {
-                                Circle()
-                                    .foregroundColor(Color.white)
-                            }
-                            .padding(.top)
-                    }
-
+                })
+                .padding(.bottom)
+                
+                Button {
+                    // add to favourites action
+                } label: {
+                    Image(systemName: bestSeller.isFavorites ? "heart.fill" : "heart")
+                        .font(.caption)
+                        .foregroundColor(Color("Orange"))
+                        .padding(8)
+                        .background {
+                            Circle()
+                                .foregroundColor(Color.white)
+                        }
+                        .padding(.top)
                 }
+                
             }
         }
-
     }
 }
 

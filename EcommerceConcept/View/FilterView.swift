@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilterView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @StateObject private var price = PriceViewModel()
     @StateObject private var brand = BrandViewModel()

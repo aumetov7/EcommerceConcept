@@ -9,19 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var productVM: ProductViewModel
+    @ObservedObject var productDetailsVM: ProductDetailsViewModel
     
     var body: some View {
         // add to favourites action
         
-        MainScreenView(productVM: productVM)
+        MainScreenView(productVM: productVM, productDetailsVM: productDetailsVM)
+            .environmentObject(CartViewModel())
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(productVM: ProductViewModel())
-        
-        ContentView(productVM: ProductViewModel())
-            .previewDevice("iPhone SE (3rd generation)")
+        ContentView(productVM: ProductViewModel(), productDetailsVM: ProductDetailsViewModel())
     }
 }
