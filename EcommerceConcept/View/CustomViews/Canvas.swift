@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct Canvas<Content : View> : View {
-    @EnvironmentObject var uiState: UIStateViewModel
-    
     let content: Content
     
     init(@ViewBuilder content: () -> Content) {

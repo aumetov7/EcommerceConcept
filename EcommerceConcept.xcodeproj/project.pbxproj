@@ -15,6 +15,7 @@
 		D89EBA0B2945EE5E00F63DBC /* PublicFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA0A2945EE5E00F63DBC /* PublicFuncs.swift */; };
 		D89EBA0D2945F29D00F63DBC /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA0C2945F29D00F63DBC /* UINavigationControllerExtension.swift */; };
 		D89EBA0F2945F77100F63DBC /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA0E2945F77100F63DBC /* BackButton.swift */; };
+		D89EBA112945FD2D00F63DBC /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA102945FD2D00F63DBC /* Detail.swift */; };
 		D8DE82BD29407C9400608129 /* HotSalesBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE82BC29407C9400608129 /* HotSalesBlockView.swift */; };
 		D8DE82C12940BA2E00608129 /* BestSellerBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE82C02940BA2E00608129 /* BestSellerBlockView.swift */; };
 		D8DE82C32940C0AF00608129 /* BestSellerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE82C22940C0AF00608129 /* BestSellerView.swift */; };
@@ -55,7 +56,6 @@
 		D8F693EE294070460025FEE6 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693ED294070460025FEE6 /* CarouselView.swift */; };
 		D8F693F42940737A0025FEE6 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693F32940737A0025FEE6 /* Product.swift */; };
 		D8F693F6294074630025FEE6 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693F5294074630025FEE6 /* ProductViewModel.swift */; };
-		D8F693F8294075130025FEE6 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F693F7294075130025FEE6 /* URL.swift */; };
 		D8FAC8F82944AFFF00471A32 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FAC8F72944AFFF00471A32 /* Cart.swift */; };
 		D8FAC8FA2944B08600471A32 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FAC8F92944B08600471A32 /* CartViewModel.swift */; };
 		D8FAC8FC2945A68600471A32 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FAC8FB2945A68600471A32 /* Network.swift */; };
@@ -75,6 +75,7 @@
 		D89EBA0A2945EE5E00F63DBC /* PublicFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFuncs.swift; sourceTree = "<group>"; };
 		D89EBA0C2945F29D00F63DBC /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		D89EBA0E2945F77100F63DBC /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		D89EBA102945FD2D00F63DBC /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		D8DE82BC29407C9400608129 /* HotSalesBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotSalesBlockView.swift; sourceTree = "<group>"; };
 		D8DE82C02940BA2E00608129 /* BestSellerBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerBlockView.swift; sourceTree = "<group>"; };
 		D8DE82C22940C0AF00608129 /* BestSellerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerView.swift; sourceTree = "<group>"; };
@@ -117,7 +118,6 @@
 		D8F693ED294070460025FEE6 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		D8F693F32940737A0025FEE6 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		D8F693F5294074630025FEE6 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
-		D8F693F7294075130025FEE6 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		D8FAC8F72944AFFF00471A32 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		D8FAC8F92944B08600471A32 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		D8FAC8FB2945A68600471A32 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -236,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				D8F693E5293F87AC0025FEE6 /* Category.swift */,
+				D89EBA102945FD2D00F63DBC /* Detail.swift */,
 				D8F693F32940737A0025FEE6 /* Product.swift */,
 				D8DE82D829422D4C00608129 /* Brand.swift */,
 				D8DE82DE2942355D00608129 /* ProductDetails.swift */,
@@ -270,7 +271,6 @@
 				D89EBA022945DD9100F63DBC /* ViewExtensions.swift */,
 				D89EBA042945DDA900F63DBC /* UIApplicationExtension.swift */,
 				D89EBA0C2945F29D00F63DBC /* UINavigationControllerExtension.swift */,
-				D8F693F7294075130025FEE6 /* URL.swift */,
 				D89EBA0A2945EE5E00F63DBC /* PublicFuncs.swift */,
 			);
 			path = Extensions;
@@ -359,7 +359,6 @@
 				D8F693E4293F77E80025FEE6 /* CategoryView.swift in Sources */,
 				D8DE82C32940C0AF00608129 /* BestSellerView.swift in Sources */,
 				D8DE82DF2942355D00608129 /* ProductDetails.swift in Sources */,
-				D8F693F8294075130025FEE6 /* URL.swift in Sources */,
 				D8FAC8FE2945AE2D00471A32 /* ProductService.swift in Sources */,
 				D8DE82CD2940E00700608129 /* FilterMenuView.swift in Sources */,
 				D8FAC9082945C76A00471A32 /* DataState.swift in Sources */,
@@ -388,6 +387,7 @@
 				D8F693C0293F5AD70025FEE6 /* EcommerceConceptApp.swift in Sources */,
 				D8F693E8293F88300025FEE6 /* CategoryViewModel.swift in Sources */,
 				D8DE82F329432E2300608129 /* Item.swift in Sources */,
+				D89EBA112945FD2D00F63DBC /* Detail.swift in Sources */,
 				D8DE82D929422D4C00608129 /* Brand.swift in Sources */,
 				D8FAC9042945B7A000471A32 /* NetworkError.swift in Sources */,
 				D8F1183E29437E7200C9033C /* MyCartView.swift in Sources */,

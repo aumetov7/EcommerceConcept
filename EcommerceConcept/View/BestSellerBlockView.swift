@@ -17,7 +17,7 @@ struct BestSellerBlockView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
             
             ZStack(alignment: .topTrailing) {
                 Button(action: {
@@ -37,7 +37,7 @@ struct BestSellerBlockView: View {
                         
                         Text(bestSeller.title)
                             .font(.custom("MarkPro", size: 10))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color.black)
                     }
                 })
                 .padding(.bottom)
@@ -67,12 +67,12 @@ extension BestSellerBlockView {
         HStack(alignment: .center) {
             Text("$\(bestSeller.discountPrice)")
                 .font(.custom("MarkPro-Bold", size: 16))
-                .foregroundColor(.black)
+                .foregroundColor(Color.black)
             
             Text("$\(bestSeller.priceWithoutDiscount)")
                 .font(.custom("MarkPro-Medium", size: 10))
                 .strikethrough()
-                .foregroundColor(.gray)
+                .foregroundColor(Color.gray)
         }
     }
     

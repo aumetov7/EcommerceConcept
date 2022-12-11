@@ -17,7 +17,7 @@ struct BackButton: View {
             Image(systemName: "chevron.left")
                 .font(.custom("MarkPro-Medium", size: 20))
                 .padding(8)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
                 .background {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("DarkPurple"))

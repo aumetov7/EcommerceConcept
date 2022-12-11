@@ -41,11 +41,11 @@ extension BottomBarView {
         HStack(alignment: .center) {
             Image(systemName: "circle.fill")
                 .font(.caption2)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
             
             Text("Explorer")
                 .font(.custom("MarkPro-Bold", size: 20))
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
         }
     }
     
@@ -55,7 +55,7 @@ extension BottomBarView {
         } label: {
             Image("bagIcon")
                 .resizedToFill(width: 15, height: 15)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
         }
     }
     
@@ -65,7 +65,7 @@ extension BottomBarView {
         } label: {
             Image("heartIcon")
                 .resizedToFill(width: 15, height: 15)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
         }
     }
     
@@ -75,7 +75,7 @@ extension BottomBarView {
         } label: {
             Image("personIcon")
                 .resizedToFill(width: 15, height: 15)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
         }
     }
 }

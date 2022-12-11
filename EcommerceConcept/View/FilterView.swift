@@ -98,7 +98,7 @@ extension FilterView {
             Image(systemName: "xmark")
                 .font(.custom("MarkPro-Medium", size: 18))
                 .padding(8)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
                 .background {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("DarkPurple"))
@@ -113,7 +113,7 @@ extension FilterView {
         } label: {
             Text("Done")
                 .font(.custom("MarkPro-Medium", size: 18))
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
                 .padding([.top, .bottom], 8)
                 .padding(.horizontal)
                 .background {

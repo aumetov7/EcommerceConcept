@@ -10,7 +10,6 @@ import SwiftUI
 struct ProductDetailsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @EnvironmentObject var uiState: UIStateViewModel
     @EnvironmentObject var cartVM: CartViewModel
     
     @ObservedObject var productDetailsVM: ProductDetailsViewModel
@@ -23,11 +22,7 @@ struct ProductDetailsView: View {
     @State private var colorSelected = 0
     @State private var memorySelected = 0
     
-    let buttonNames = ["Shop", "Details", "Featured"]
-    let icons = ["coreIcon", "cameraIcon", "ramIcon", "memoryIcon"]
-    let text = ["Exynos 990", "108 + 12 mp", "8 GB", "256 GB"]
-    let colorButton = ["Brown", "DarkPurple"]
-    let memoryButton = ["128 GB", "256 GB"]
+    let details = Detail()
     
     var body: some View {
         NavigationView {
@@ -49,7 +44,7 @@ struct ProductDetailsView: View {
                     ZStack(alignment: .top) {
                         Rectangle()
                             .cornerRadius(30, corners: [.topLeft, .topRight])
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.white)
                             .ignoresSafeArea()
                         
                         VStack(alignment: .leading) {
@@ -68,7 +63,7 @@ struct ProductDetailsView: View {
                                     Image(systemName: "star.fill")
                                 }
                                 .font(.callout)
-                                .foregroundColor(.yellow)
+                                .foregroundColor(Color.yellow)
                             }
                             .padding(.bottom)
                             
@@ -119,7 +114,6 @@ struct ProductDetailsView: View {
             .background(Color("BackgroundColor"))
         }
         .navigationBarBackButtonHidden()
-        .environmentObject(cartVM)
     }
 }
 
@@ -127,7 +121,10 @@ struct ProductDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         ProductDetailsView(productDetailsVM: ProductDetailsViewModel(productDetailsService: ProductDetailsService(network: Network())))
             .environmentObject(UIStateViewModel())
-            .environmentObject(CartViewModel())
+            .environmentObject(CartViewModel(productDetails: ProductDetails(basket: [],
+                                                                            delivery: "",
+                                                                            id: "",
+                                                                            total: 0)))
     }
 }
 
@@ -139,7 +136,7 @@ extension ProductDetailsView {
             Image(systemName: "heart")
                 .font(.custom("MarkPro-Medium", size: 18))
                 .padding(8)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
                 .background {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("DarkPurple"))
@@ -154,13 +151,13 @@ extension ProductDetailsView {
                 Button {
                     selectedButton = index
                 } label: {
-                    Text(buttonNames[index])
+                    Text(details.buttonNames[index])
                         .font(.custom("MarkPro-Bold", size: 20))
-                        .foregroundColor(selectedButton == index ? .black : .gray)
+                        .foregroundColor(selectedButton == index ? Color.black : Color.gray)
                         .overlay(alignment: .bottom) {
                             if selectedButton == index {
                                 Rectangle()
-                                    .frame(width: buttonNames[index].count > 5 ? width * 0.25 : width * 0.2,
+                                    .frame(width: details.buttonNames[index].count > 5 ? width * 0.25 : width * 0.2,
                                            height: 3)
                                     .offset(y: 5)
                                     .foregroundColor(Color("Orange"))
@@ -190,12 +187,12 @@ extension ProductDetailsView {
     @ViewBuilder
     func detailIcon(index: Int) -> some View {
         VStack(alignment: .center) {
-            Image(icons[index])
+            Image(details.icons[index])
                 .resizable()
                 .scaledToFit()
                 .frame(width: 25, height: 22)
                 .padding(.bottom, 2)
-            Text(text[index])
+            Text(details.text[index])
                 .font(.custom("MarkPro", size: 11))
         }
         .foregroundColor(.gray)
@@ -215,13 +212,13 @@ extension ProductDetailsView {
     func colorLabel(index: Int) -> some View {
         ZStack(alignment: .center) {
             Circle()
-                .foregroundColor(Color(colorButton[index]))
+                .foregroundColor(Color(details.colorButton[index]))
                 .frame(width: 40)
             
             if colorSelected == index {
                 Image(systemName: "checkmark")
                     .font(.custom("MarkPro-Bold", size: 20))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.white)
             }
         }
     }
@@ -240,9 +237,9 @@ extension ProductDetailsView {
     
     @ViewBuilder
     func memoryLabel(index: Int) -> some View {
-        Text(memoryButton[index])
+        Text(details.memoryButton[index])
             .font(.custom("MarkPro-Bold", size: 13))
-            .foregroundColor(memorySelected == index ? .white : .gray)
+            .foregroundColor(memorySelected == index ? Color.white : Color.gray)
             .padding(8)
             .background {
                 if memorySelected == index {
@@ -260,7 +257,7 @@ extension ProductDetailsView {
                 Image("bagIcon")
                     .resizedToFill(width: 25, height: 25)
                     .padding(8)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.white)
                     .background {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(Color("Orange"))
@@ -291,7 +288,7 @@ extension ProductDetailsView {
             .font(.custom("MarkPro-Bold", size: 20))
             .padding(16)
             .padding(.horizontal)
-            .foregroundColor(.white)
+            .foregroundColor(Color.white)
             .background {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(Color("Orange"))

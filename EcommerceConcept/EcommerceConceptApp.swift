@@ -11,7 +11,6 @@ import SwiftUI
 struct EcommerceConceptApp: App {
     @StateObject private var productVM = ProductViewModel(productService: ProductService(network: Network()))
     
-    
     var body: some Scene {
         WindowGroup {
             switch productVM.state {

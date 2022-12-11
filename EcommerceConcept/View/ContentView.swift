@@ -10,10 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var productVM: ProductViewModel
     
-    
     var body: some View {
         MainScreenView(productVM: productVM)
-            .environmentObject(CartViewModel())
     }
 }
 

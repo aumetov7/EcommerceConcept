@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct MainScreenView: View {
-    @StateObject private var categoryVM = CategoryViewModel()
     @StateObject private var productDetailsVM = ProductDetailsViewModel(productDetailsService: ProductDetailsService(network: Network()))
+    @StateObject private var categoryVM = CategoryViewModel()
+    
+    @EnvironmentObject var cartVM: CartViewModel
     
     @ObservedObject var productVM: ProductViewModel
-    
     
     @State private var searchText = ""
     @State private var showMenu = false
@@ -86,14 +87,14 @@ struct MainScreenView: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         .environmentObject(UIStateViewModel())
-        .environmentObject(CartViewModel())
+        .environmentObject(CartViewModel(productDetails: productDetailsVM.products))
     }
 }
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenView(productVM: ProductViewModel(productService: ProductService(network: Network())))
-            .environmentObject(CartViewModel())
+            .environmentObject(CartViewModel(productDetails: ProductDetails(basket: [], delivery: "", id: "", total: 0)))
     }
 }
 
@@ -129,11 +130,11 @@ extension MainScreenView {
                 
                 Text("Zihuatanejo, Gro")
                     .font(.custom("MarkPro-Medium", size: 15))
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.black)
                 
                 Image(systemName: "chevron.down")
                     .font(.footnote)
-                    .foregroundColor(.black.opacity(0.2))
+                    .foregroundColor(Color.black.opacity(0.2))
             }
         }
     }
@@ -141,7 +142,6 @@ extension MainScreenView {
     var filterButton: some View {
         Button {
             showMenu.toggle()
-            print("Tapped")
         } label: {
             Image("filterIcon")
                 .resizedToFill(width: 15,
@@ -149,7 +149,7 @@ extension MainScreenView {
                 .padding()
                 .background {
                     Rectangle()
-                        .foregroundColor(.clear)
+                        .foregroundColor(Color.clear)
                 }
         }
     }

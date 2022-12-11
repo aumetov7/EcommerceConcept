@@ -26,7 +26,7 @@ struct PickerButton: View {
                         .frame(width: 25, height: width * 0.07)
                     
                     Text("-")
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.white)
                         .font(.title2)
                         .fontWeight(.bold)
                 }
@@ -37,7 +37,7 @@ struct PickerButton: View {
                     .frame(width: 25, height: width * 0.07)
                 
                 Text("\(itemCount)")
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.white)
                     .font(.custom("MarkPro-Medium", size: 20))
             }
             
@@ -50,7 +50,7 @@ struct PickerButton: View {
                         .frame(width: 25, height: width * 0.07)
                     
                     Text("+")
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.white)
                         .font(.title3)
                         .fontWeight(.bold)
                 }

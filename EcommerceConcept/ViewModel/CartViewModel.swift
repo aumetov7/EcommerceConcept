@@ -11,24 +11,25 @@ import UIKit
 class CartViewModel: ObservableObject {
     @Published var carts: Cart = Cart.cart
     
-    let productDetailsVM = ProductDetailsViewModel(productDetailsService: ProductDetailsService(network: Network()))
-    let uiState = UIStateViewModel()
+    let productDetails: ProductDetails
+    
+    init(productDetails: ProductDetails) {
+        self.productDetails = productDetails
+    }
     
     func addToCart(itemId: Int) {
-        for item in productDetailsVM.products.basket {
+        for item in productDetails.basket {
             if itemId == item.id {
                 let phone = Phone(id: itemId, title: item.title, image: item.images, price: item.price, count: 1)
                 let filteredCart = carts.phone.filter { $0.id == itemId }.count > 0
                 
                 if carts.phone.isEmpty {
                     carts.phone.append(phone)
-                    print("Append")
                 } else {
                     if filteredCart {
                         for index in 0 ..< carts.phone.count {
                             if carts.phone[index].id == itemId {
                                 carts.phone[index].count += 1
-                                print(carts.phone[index].count)
                             }
                         }
                     } else {
@@ -37,15 +38,15 @@ class CartViewModel: ObservableObject {
                 }
                 
                 carts.totalCount += phone.count
-                carts.totalPrice += phone.price
+                carts.totalPrice += phone.price * phone.count
             }
         }
         
-        carts.delivery = productDetailsVM.products.delivery
+        carts.delivery = productDetails.delivery
     }
     
     func decrease(itemId: Int) {
-        for item in productDetailsVM.products.basket {
+        for item in productDetails.basket {
             if itemId == item.id {
                 let filteredCart = carts.phone.filter { $0.id == itemId }.count > 0
                 
@@ -56,11 +57,12 @@ class CartViewModel: ObservableObject {
                                 carts.phone[index].count -= 1
                                 carts.totalPrice -= carts.phone[index].price
                                 carts.totalCount -= 1
-                                print(carts.phone[index].count)
                             } else if carts.phone[index].count == 1 {
                                 carts.totalPrice -= carts.phone[index].price
                                 carts.phone.remove(at: index)
                                 carts.totalCount -= 1
+                                
+                                break
                             }
                         }
                     }
@@ -70,7 +72,7 @@ class CartViewModel: ObservableObject {
     }
     
     func removeFromCart(itemId: Int) {
-        for item in productDetailsVM.products.basket {
+        for item in productDetails.basket {
             if itemId == item.id {
                 let filteredCart = carts.phone.filter { $0.id == itemId }.count > 0
                 

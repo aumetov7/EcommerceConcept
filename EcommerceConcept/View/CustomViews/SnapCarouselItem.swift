@@ -35,6 +35,7 @@ struct SnapCarouselItem: View {
                 } placeholder: {
                     ProgressView()
                 }
+                .frame(width: width * 0.7, height: height * 0.4)
 
             }
             .foregroundColor(Color.white)
@@ -54,7 +55,7 @@ struct SnapCarouselItem: View {
                 if uiState.activeCard == basket.id - 1 {
                     itemId = basket.id
                     title = basket.title
-                    price = basket.price
+                    price = basket.price   
                 }
             }
         }

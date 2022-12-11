@@ -16,7 +16,7 @@ struct CategoryView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 22) {
-                ForEach(0 ..< 5) { index in
+                ForEach(0 ..< categoryVM.category.names.count, id: \.self) { index in
                     Button {
                         categoryVM.buttonSelected = index
                     } label: {
@@ -49,6 +49,8 @@ struct CategoryView: View {
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView(categoryVM: CategoryViewModel(), width: 71, height: 100)
+        CategoryView(categoryVM: CategoryViewModel(),
+                     width: 71,
+                     height: 100)
     }
 }

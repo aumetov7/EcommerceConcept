@@ -22,7 +22,7 @@ struct ExpandedView: View {
                 } label: {
                     Text(element)
                         .font(.custom("MarkPro", size: 18))
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.black)
                         .padding(.bottom, 2)
                 }
             }

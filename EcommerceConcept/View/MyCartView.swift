@@ -74,7 +74,7 @@ struct MyCartView: View {
                                         
                                         Text("Delivery")
                                     }
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.white)
                                     .font(.custom("MarkPro", size: 15))
                                     
                                     Spacer()
@@ -84,7 +84,7 @@ struct MyCartView: View {
                                         
                                         Text(cartVM.carts.delivery)
                                     }
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.white)
                                     .font(.custom("MarkPro-Bold", size: 15))
                                 }
                             }
@@ -129,7 +129,7 @@ struct MyCartView: View {
 struct MyCartView_Previews: PreviewProvider {
     static var previews: some View {
         MyCartView()
-            .environmentObject(CartViewModel())
+            .environmentObject(CartViewModel(productDetails: ProductDetails(basket: [], delivery: "", id: "", total: 0)))
     }
 }
 
@@ -138,7 +138,7 @@ extension MyCartView {
     func productPicture(width: CGFloat, url: String) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
                 .frame(width: width * 0.21, height: width * 0.21)
             
             AsyncImage(url: URL(string: url)) { image in
@@ -154,7 +154,7 @@ extension MyCartView {
     @ViewBuilder
     func productTitle(title: String, width: CGFloat) -> some View {
         Text(title)
-            .foregroundColor(.white)
+            .foregroundColor(Color.white)
             .font(.custom("MarkPro-Medium", size: 20))
             .lineLimit(2)
             .frame(width: width * 0.45,
@@ -192,7 +192,7 @@ extension MyCartView {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(16)
                 .padding(.horizontal)
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
                 .background {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("Orange"))
@@ -210,7 +210,7 @@ extension MyCartView {
             } label: {
                 Image("locationIcon")
                     .padding(8)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.white)
                     .background {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(Color("Orange"))

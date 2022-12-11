@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SnapCarousel: View {
-    @EnvironmentObject var uiState: UIStateViewModel
-    
     let basket: [Basket]
     
     @Binding var itemId: Int

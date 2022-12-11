@@ -25,12 +25,12 @@ struct HotSalesBlockView: View {
                         
                         Text(hotSales.title)
                             .font(.custom("MarkPro-Bold", size: 22))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.white)
                             .lineLimit(2)
                         
                         Text(hotSales.subtitle)
                             .font(.custom("MarkPro", size: 11))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.white)
                     }
                     .frame(height: height * 0.16, alignment: .top)
                     
@@ -79,7 +79,7 @@ extension HotSalesBlockView {
             
             Text("New")
                 .font(.custom("MarkPro", size: 10))
-                .foregroundColor(.white)
+                .foregroundColor(Color.white)
         }
     }
     
@@ -89,12 +89,12 @@ extension HotSalesBlockView {
         } label: {
             Text("Buy now!")
                 .font(.custom("MarkPro-Bold", size: 11))
-                .foregroundColor(.black)
+                .foregroundColor(Color.black)
                 .padding(5)
                 .padding(.horizontal)
                 .background {
                     RoundedRectangle(cornerRadius: 5)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.white)
                 }
         }
     }
