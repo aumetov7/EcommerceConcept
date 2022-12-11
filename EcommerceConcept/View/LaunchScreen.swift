@@ -14,15 +14,16 @@ struct LaunchScreen: View {
                 ZStack {
                     Circle()
                         .foregroundColor(Color("Orange"))
-                        .frame(width: geometry.size.width * 0.38)
+                        .frame(width: geometry.size.width * 0.4)
                     
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Ecommerce")
                         Text("Concept")
                     }
                     .font(.custom("MarkPro-Heavy", size: 30))
-                    .foregroundColor(.white)
-                    .padding(.leading, geometry.size.width * 0.3)
+                    .foregroundColor(Color.white)
+                    .frame(width: geometry.size.width * 0.72,
+                           alignment: .trailing)
                 }
             }
             .frame(width: geometry.size.width,

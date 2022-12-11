@@ -23,19 +23,14 @@ struct SearchBarView: View {
                                 .placeholder(when: searchText.isEmpty) {
                                     Text("Search")
                                         .font(.custom("MarkPro", size: 12))
-                                        .foregroundColor(.gray)
+                                        .foregroundColor(Color.gray)
                                 }
                                 .font(.custom("MarkPro", size: 12))
-                                .accentColor(.gray)
+                                .accentColor(Color.gray)
                         }
                         
                         if searchText.count > 0 {
-                            Button {
-                                searchText = ""
-                            } label: {
-                                Image(systemName: "xmark.circle")
-                                    .foregroundColor(.black)
-                            }
+                            xmarkButton
                         }
                     }
                     .padding(8)
@@ -44,18 +39,7 @@ struct SearchBarView: View {
                             .foregroundColor(Color.white)
                 }
             
-            Button {
-                // qrCode action
-            } label: {
-                Image("qrCodeIcon")
-                    .resizedToFill(width: 15, height: 15)
-                    .foregroundColor(Color.white)
-                    .padding(8)
-                    .background {
-                        Circle()
-                            .foregroundColor(Color("Orange"))
-                    }
-            }
+            qrCodeButton
         }
         .padding(.horizontal)
     }
@@ -67,15 +51,28 @@ struct SearchBarView_Previews: PreviewProvider {
     }
 }
 
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
+extension SearchBarView {
+    var xmarkButton: some View {
+        Button {
+            searchText = ""
+        } label: {
+            Image(systemName: "xmark.circle")
+                .foregroundColor(.black)
+        }
+    }
+    
+    var qrCodeButton: some View {
+        Button {
+            // qrCode action
+        } label: {
+            Image("qrCodeIcon")
+                .resizedToFill(width: 15, height: 15)
+                .foregroundColor(Color.white)
+                .padding(8)
+                .background {
+                    Circle()
+                        .foregroundColor(Color("Orange"))
+                }
         }
     }
 }

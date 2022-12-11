@@ -20,7 +20,7 @@ struct SnapCarousel: View {
     let height: CGFloat
     
     var body: some View {
-        return Canvas {
+        Canvas {
             Carousel(numberOfItems: CGFloat(basket.count),
                      spacing: width * 0.08,
                      widthOfHiddenCards: width * 0.1) {

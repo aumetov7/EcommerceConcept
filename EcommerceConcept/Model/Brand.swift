@@ -12,5 +12,5 @@ struct Brand {
 }
 
 extension Brand {
-    static var brands = ["Samsung", "Apple", "Google", "Xiaomi"]
+    static var brands = ["Samsung", "Apple", "Google"]
 }

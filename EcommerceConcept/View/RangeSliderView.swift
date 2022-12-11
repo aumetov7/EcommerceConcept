@@ -25,33 +25,9 @@ struct RangeSliderView: View {
                     .offset(x: price.minLocation)
                 
                 HStack(spacing: 0) {
-                    Circle()
-                        .fill(Color("Orange"))
-                        .frame(width: 18, height: 18)
-                        .offset(x: price.minLocation)
-                        .gesture(
-                            DragGesture()
-                                .onChanged({ value in
-                                    if value.location.x >= 0 && value.location.x <= price.maxLocation - 32 {
-                                        price.minLocation = value.location.x
-                                        price.minValue = value.location.x * 10000 / (width * 0.75)
-                                    }
-                                })
-                        )
+                    leftController
                     
-                    Circle()
-                        .fill(Color("Orange"))
-                        .frame(width: 18, height: 18)
-                        .offset(x: price.maxLocation - 32)
-                        .gesture(
-                            DragGesture()
-                                .onChanged({ value in
-                                    if value.location.x <= (width * 0.75) && value.location.x >= price.minLocation + 32 {
-                                        price.maxLocation = value.location.x
-                                        price.maxValue = value.location.x * 10000 / (width * 0.75)
-                                    }
-                                })
-                        )
+                    rightController
                 }
             }
             
@@ -68,14 +44,44 @@ struct RangeSliderView: View {
         }
         .padding([.top, .bottom], 6)
     }
-    
-    func getValue(val: CGFloat) -> String {
-        return String(format: "%.0f", val.rounded())
-    }
 }
 
 struct RangeSliderView_Previews: PreviewProvider {
     static var previews: some View {
         RangeSliderView(price: PriceViewModel(), width: 414)
     }
+}
+
+extension RangeSliderView {
+    var leftController: some View {
+        Circle()
+            .fill(Color("Orange"))
+            .frame(width: 18, height: 18)
+            .offset(x: price.minLocation)
+            .gesture(
+                DragGesture()
+                    .onChanged({ value in
+                        if value.location.x >= 0 && value.location.x <= price.maxLocation - 32 {
+                            price.minLocation = value.location.x
+                            price.minValue = value.location.x * 10000 / (width * 0.75)
+                        }
+                    })
+            )
+    }
+    
+    var rightController: some View {
+        Circle()
+            .fill(Color("Orange"))
+            .frame(width: 18, height: 18)
+            .offset(x: price.maxLocation - 32)
+            .gesture(
+                DragGesture()
+                    .onChanged({ value in
+                        if value.location.x <= (width * 0.75) && value.location.x >= price.minLocation + 32 {
+                            price.maxLocation = value.location.x
+                            price.maxValue = value.location.x * 10000 / (width * 0.75)
+                        }
+                    })
+            )
+    }  
 }

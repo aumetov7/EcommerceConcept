@@ -20,39 +20,11 @@ struct BottomBarView: View {
                 .frame(width: width, height: height * 0.1)
             
             HStack(alignment: .center, spacing: 50) {
-                HStack(alignment: .center) {
-                    Image(systemName: "circle.fill")
-                        .font(.caption2)
-                        .foregroundColor(.white)
-                    
-                    Text("Explorer")
-                        .font(.custom("MarkPro-Bold", size: 20))
-                        .foregroundColor(.white)
-                }
+                titleText
                 
-                Button {
-                    showCart.toggle()
-                } label: {
-                    Image("bagIcon")
-                        .resizedToFill(width: 15, height: 15)
-                        .foregroundColor(.white)
-                }
-
-                Button {
-                    // heart action
-                } label: {
-                    Image("heartIcon")
-                        .resizedToFill(width: 15, height: 15)
-                        .foregroundColor(.white)
-                }
-                
-                Button {
-                    // person action
-                } label: {
-                    Image("personIcon")
-                        .resizedToFill(width: 15, height: 15)
-                        .foregroundColor(.white)
-                }
+                bagButton
+                favouritesButton
+                profileButton
             }
         }
     }
@@ -61,5 +33,49 @@ struct BottomBarView: View {
 struct BottomBarView_Previews: PreviewProvider {
     static var previews: some View {
         BottomBarView(showCart: .constant(false), width: 414, height: 896)
+    }
+}
+
+extension BottomBarView {
+    var titleText: some View {
+        HStack(alignment: .center) {
+            Image(systemName: "circle.fill")
+                .font(.caption2)
+                .foregroundColor(.white)
+            
+            Text("Explorer")
+                .font(.custom("MarkPro-Bold", size: 20))
+                .foregroundColor(.white)
+        }
+    }
+    
+    var bagButton: some View {
+        Button {
+            showCart.toggle()
+        } label: {
+            Image("bagIcon")
+                .resizedToFill(width: 15, height: 15)
+                .foregroundColor(.white)
+        }
+    }
+    
+    var favouritesButton: some View {
+        Button {
+            // heart action
+        } label: {
+            Image("heartIcon")
+                .resizedToFill(width: 15, height: 15)
+                .foregroundColor(.white)
+        }
+    }
+    
+    var profileButton: some View {
+        Button {
+            // person action
+        } label: {
+            Image("personIcon")
+                .resizedToFill(width: 15, height: 15)
+                .foregroundColor(.white)
+        }
     }
 }

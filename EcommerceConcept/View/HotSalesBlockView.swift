@@ -20,15 +20,7 @@ struct HotSalesBlockView: View {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         if hotSales.isNew != nil {
-                            ZStack {
-                                Circle()
-                                    .foregroundColor(Color("Orange"))
-                                    .frame(width: 30)
-                                
-                                Text("New")
-                                    .font(.custom("MarkPro", size: 10))
-                                    .foregroundColor(.white)
-                            }
+                            newMark
                         }
                         
                         Text(hotSales.title)
@@ -42,19 +34,7 @@ struct HotSalesBlockView: View {
                     }
                     .frame(height: height * 0.16, alignment: .top)
                     
-                    Button {
-                        // buy action
-                    } label: {
-                        Text("Buy now!")
-                            .font(.custom("MarkPro-Bold", size: 11))
-                            .foregroundColor(.black)
-                            .padding(5)
-                            .padding(.horizontal)
-                            .background {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .foregroundColor(.white)
-                            }
-                    }
+                    buyNowButton
                 }
                 .frame(width: width * 0.3, height: height * 0.25)
                 .padding()
@@ -70,7 +50,6 @@ struct HotSalesBlockView: View {
                     ProgressView()
                 }
                 .frame(width: width * 0.45, height: height * 0.25)
-
             }
             .frame(height: height * 0.25)
         }
@@ -91,19 +70,32 @@ struct HotSalesBlockView_Previews: PreviewProvider {
     }
 }
 
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
+extension HotSalesBlockView {
+    var newMark: some View {
+        ZStack {
+            Circle()
+                .foregroundColor(Color("Orange"))
+                .frame(width: 30)
+            
+            Text("New")
+                .font(.custom("MarkPro", size: 10))
+                .foregroundColor(.white)
+        }
     }
-}
-
-struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
     
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        
-        return Path(path.cgPath)
+    var buyNowButton: some View {
+        Button {
+            // buy action
+        } label: {
+            Text("Buy now!")
+                .font(.custom("MarkPro-Bold", size: 11))
+                .foregroundColor(.black)
+                .padding(5)
+                .padding(.horizontal)
+                .background {
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(.white)
+                }
+        }
     }
 }

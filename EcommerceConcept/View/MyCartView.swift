@@ -20,7 +20,7 @@ struct MyCartView: View {
                         .font(.custom("MarkPro-Bold", size: 35))
                         .frame(height: geometry.size.height * 0.15, alignment: .bottom)
                         .padding(.horizontal)
-                        .padding(.horizontal)
+                        .padding(.leading)
                     
                     ZStack(alignment: .top) {
                         Rectangle()
@@ -33,59 +33,33 @@ struct MyCartView: View {
                                 VStack(spacing: 40) {
                                     ForEach(cartVM.carts.phone, id: \.id) { item in
                                         HStack(spacing: 16) {
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .foregroundColor(.white)
-                                                    .frame(width: geometry.size.width * 0.21, height: geometry.size.width * 0.21)
-                                                
-                                                AsyncImage(url: URL(string: item.image)) { image in
-                                                    image
-                                                        .resizedToFill(width: geometry.size.width * 0.19, height: geometry.size.width * 0.19)
-                                                        .clipped()
-                                                } placeholder: {
-                                                    ProgressView()
-                                                }
-                                            }
+                                            productPicture(width: geometry.size.width,
+                                                           url: item.image)
                                             
                                             VStack(alignment: .leading) {
-                                                Text(item.title)
-                                                    .foregroundColor(.white)
-                                                    .font(.custom("MarkPro-Medium", size: 20))
-                                                    .lineLimit(2)
-                                                    .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.14, alignment: .topLeading)
+                                                productTitle(title: item.title,
+                                                             width: geometry.size.width)
                                                 
-                                                Text("$\(item.price)")
-                                                    .foregroundColor(Color("Orange"))
-                                                    .font(.custom("MarkPro-Medium", size: 20))
-                                                    .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.05, alignment: .bottomLeading)
+                                                productPrice(price: item.price,
+                                                             width: geometry.size.width)
                                             }
                                             
-                                            VStack {
-                                                PickerButton(itemCount: item.count,
-                                                             width: geometry.size.width,
-                                                             height: geometry.size.height) { _ in
-                                                    cartVM.decrease(itemId: item.id)
-                                                } plusAction: { _ in
-                                                    cartVM.addToCart(itemId: item.id)
-                                                }
-
+                                            PickerButton(itemCount: item.count,
+                                                         width: geometry.size.width,
+                                                         height: geometry.size.height) { _ in
+                                                cartVM.decrease(itemId: item.id)
+                                            } plusAction: { _ in
+                                                cartVM.addToCart(itemId: item.id)
                                             }
                                             
-                                            VStack {
-                                                Button {
-                                                    cartVM.removeFromCart(itemId: item.id)
-                                                } label: {
-                                                    Image("trashIcon")
-                                                        .resizedToFill(width: 20, height: 20)
-                                                        .foregroundColor(Color("LightGray"))
-                                                }
-
-                                            }
+                                            trashButton(id: item.id)
                                         }
                                     }
                                     .padding(.top, 8)
                                 }
-                                .frame(width: geometry.size.width, height: geometry.size.height * 0.48, alignment: .top)   
+                                .frame(width: geometry.size.width,
+                                       height: geometry.size.height * 0.48,
+                                       alignment: .top)
                             }
                             
                             Divider()
@@ -106,7 +80,6 @@ struct MyCartView: View {
                                     Spacer()
                                     
                                     VStack(alignment: .leading, spacing: 15) {
-//                                        Text("$6,000 us")
                                         Text("$\(cartVM.carts.totalPrice)")
                                         
                                         Text(cartVM.carts.delivery)
@@ -124,24 +97,10 @@ struct MyCartView: View {
                                     Color.gray
                                 }
                             
-                            Button {
-                                // add to cart action
-                            } label: {
-                                Text("Checkout")
-                                    .font(.custom("MarkPro-Bold", size: 20))
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                                    .padding(16)
+                            checkoutButton
+                                .frame(maxWidth: .infinity, alignment: .center)
                                 .padding(.horizontal)
-                                .foregroundColor(.white)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundColor(Color("Orange"))
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.horizontal)
-                            .padding(.horizontal)
-                            
+                                .padding(.horizontal)
                         }
                         .padding(.top, 50)
                     }
@@ -151,41 +110,13 @@ struct MyCartView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            presentationMode.wrappedValue.dismiss()
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .font(.custom("MarkPro-Medium", size: 20))
-                                .padding(8)
-                                .foregroundColor(.white)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundColor(Color("DarkPurple"))
-                                        .frame(width: 40, height: 40)
-                                }
-                        }
-                        .padding(.leading)
+                        BackButton(presentationMode: presentationMode)
+                            .padding(.leading)
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack(alignment: .center, spacing: 2) {
-                            Text("Add address")
-                                .font(.custom("MarkPro-Medium", size: 15))
-                            
-                            Button {
-                                // location action
-                            } label: {
-                                Image("locationIcon")
-                                    .padding(8)
-                                    .foregroundColor(.white)
-                                    .background {
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .foregroundColor(Color("Orange"))
-                                            .frame(width: 40, height: 40)
-                                    }
-                            }
-                        }
-                        .padding(.trailing)
+                        addressButton
+                            .padding(.trailing)
                     }
                 }
             }
@@ -199,5 +130,93 @@ struct MyCartView_Previews: PreviewProvider {
     static var previews: some View {
         MyCartView()
             .environmentObject(CartViewModel())
+    }
+}
+
+extension MyCartView {
+    @ViewBuilder
+    func productPicture(width: CGFloat, url: String) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(.white)
+                .frame(width: width * 0.21, height: width * 0.21)
+            
+            AsyncImage(url: URL(string: url)) { image in
+                image
+                    .resizedToFill(width: width * 0.19, height: width * 0.19)
+                    .clipped()
+            } placeholder: {
+                ProgressView()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func productTitle(title: String, width: CGFloat) -> some View {
+        Text(title)
+            .foregroundColor(.white)
+            .font(.custom("MarkPro-Medium", size: 20))
+            .lineLimit(2)
+            .frame(width: width * 0.45,
+                   height: width * 0.14,
+                   alignment: .topLeading)
+    }
+    
+    @ViewBuilder
+    func productPrice(price: Int, width: CGFloat) -> some View {
+        Text("$\(price)")
+            .foregroundColor(Color("Orange"))
+            .font(.custom("MarkPro-Medium", size: 20))
+            .frame(width: width * 0.45,
+                   height: width * 0.05,
+                   alignment: .bottomLeading)
+    }
+    
+    @ViewBuilder
+    func trashButton(id: Int) -> some View {
+        Button {
+            cartVM.removeFromCart(itemId: id)
+        } label: {
+            Image("trashIcon")
+                .resizedToFill(width: 20, height: 20)
+                .foregroundColor(Color("LightGray"))
+        }
+    }
+    
+    var checkoutButton: some View {
+        Button {
+            // add to cart action
+        } label: {
+            Text("Checkout")
+                .font(.custom("MarkPro-Bold", size: 20))
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(16)
+                .padding(.horizontal)
+                .foregroundColor(.white)
+                .background {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("Orange"))
+                }
+        }
+    }
+    
+    var addressButton: some View {
+        HStack(alignment: .center, spacing: 2) {
+            Text("Add address")
+                .font(.custom("MarkPro-Medium", size: 15))
+            
+            Button {
+                // location action
+            } label: {
+                Image("locationIcon")
+                    .padding(8)
+                    .foregroundColor(.white)
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("Orange"))
+                            .frame(width: 40, height: 40)
+                    }
+            }
+        }
     }
 }

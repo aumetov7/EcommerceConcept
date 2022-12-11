@@ -15,18 +15,16 @@ struct CarouselView: View {
     let height: CGFloat
     
     var body: some View {
-        VStack {
-            TabView(selection: $selection) {
-                ForEach(productData, id: \.id) { product in
-                    HotSalesBlockView(hotSales: product,
-                                      width: width,
-                                      height: height)
-                        .tag(product.id)
-                        .padding(.horizontal)
-                }
+        TabView(selection: $selection) {
+            ForEach(productData, id: \.id) { product in
+                HotSalesBlockView(hotSales: product,
+                                  width: width,
+                                  height: height)
+                .tag(product.id)
+                .padding(.horizontal)
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
         }
+        .tabViewStyle(.page(indexDisplayMode: .never))
         .frame(height: height * 0.25)
     }
 }

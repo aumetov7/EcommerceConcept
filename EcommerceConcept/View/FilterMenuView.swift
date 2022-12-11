@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct FilterMenuView: View {
+struct FilterMenuView<Content: View>: View {
     @Binding var isExpanded: Bool
     
+    let content: Content
     let title: String
     let item: String
     
@@ -38,15 +39,7 @@ struct FilterMenuView: View {
                 })
                 .padding(.bottom)
             } expandedView: {
-                VStack(alignment: .leading) {
-                    ForEach(0 ..< 3, id: \.self) { _ in
-                        Text(item)
-                            .padding(.bottom, 2)
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                .font(.custom("MarkPro", size: 18))
+                content
             }
         }
     }
@@ -54,6 +47,6 @@ struct FilterMenuView: View {
 
 struct FilterMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterMenuView(isExpanded: .constant(false), title: "Brand", item: "Samsung")
+        FilterMenuView(isExpanded: .constant(false), content: EmptyView(), title: "Brand", item: "Samsung")
     }
 }

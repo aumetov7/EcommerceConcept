@@ -59,18 +59,7 @@ struct ProductDetailsView: View {
                                 
                                 Spacer()
                                 
-                                Button {
-                                    // favourites action
-                                } label: {
-                                    Image(systemName: "heart")
-                                        .font(.custom("MarkPro-Medium", size: 18))
-                                        .padding(8)
-                                        .foregroundColor(.white)
-                                        .background {
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(Color("DarkPurple"))
-                                        }
-                                }
+                                favouritesButton
                             }
                             .padding(.bottom)
                             
@@ -83,117 +72,26 @@ struct ProductDetailsView: View {
                             }
                             .padding(.bottom)
                             
-                            HStack(alignment: .top) {
-                                ForEach(0 ..< 3, id: \.self) { index in
-                                    Button {
-                                        selectedButton = index
-                                    } label: {
-                                        Text(buttonNames[index])
-                                            .font(.custom("MarkPro-Bold", size: 20))
-                                            .foregroundColor(selectedButton == index ? .black : .gray)
-                                            .overlay(alignment: .bottom) {
-                                                if selectedButton == index {
-                                                    Rectangle()
-                                                        .frame(width: buttonNames[index].count > 5 ? geometry.size.width * 0.25 : geometry.size.width * 0.2,
-                                                               height: 3)
-                                                        .offset(y: 5)
-                                                        .foregroundColor(Color("Orange"))
-                                                }
-                                            }
-                                        
-                                        if index == 0 || index == 1 {
-                                            Spacer()
-                                        }
-                                    }
-                                }
-                            }
+                            categoryButtons(width: geometry.size.width)
                             .padding(.horizontal)
                             .padding(.bottom)
                             
-                            HStack(alignment: .center) {
-                                ForEach(0 ..< 4, id: \.self) { index in
-                                    VStack(alignment: .center) {
-                                        Image(icons[index])
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 25, height: 22)
-                                            .padding(.bottom, 2)
-                                        Text(text[index])
-                                            .font(.custom("MarkPro", size: 11))
-                                    }
-                                    .foregroundColor(.gray)
-                                    
-                                    if index != 3 {
-                                        Spacer()
-                                    }
-                                }
-                            }
+                            detailsIcons
                             .padding(.bottom)
                             
                             Text("Select color and capacity")
                                 .font(.custom("MarkPro-Medium", size: 16))
                             
                             HStack(alignment: .center, spacing: 25) {
-                                ForEach(0 ..< 2, id: \.self) { index in
-                                    Button {
-                                        colorSelected = index
-                                    } label: {
-                                        ZStack(alignment: .center) {
-                                            Circle()
-                                                .foregroundColor(Color(colorButton[index]))
-                                                .frame(width: 40)
-                                            
-                                            if colorSelected == index {
-                                                Image(systemName: "checkmark")
-                                                    .font(.custom("MarkPro-Bold", size: 20))
-                                                    .foregroundColor(.white)
-                                            }
-                                        }
-                                    }
-                                }
+                                colorSelecter
                                 
                                 Spacer()
                                 
-                                ForEach(0 ..< 2, id: \.self) { index in
-                                    HStack(alignment: .center, spacing: 25) {
-                                        Button {
-                                            memorySelected = index
-                                        } label: {
-                                            Text(memoryButton[index])
-                                                .font(.custom("MarkPro-Bold", size: 13))
-                                                .foregroundColor(memorySelected == index ? .white : .gray)
-                                                .padding(8)
-                                                .background {
-                                                    if memorySelected == index {
-                                                        RoundedRectangle(cornerRadius: 10)
-                                                            .foregroundColor(Color("Orange"))
-                                                    }
-                                                }
-                                        }
-                                    }
-                                }
+                                memorySelecter
                             }
                             .padding(.bottom)
                             
-                            Button {
-                                cartVM.addToCart(itemId: itemId)
-                            } label: {
-                                HStack(alignment: .center) {
-                                    Text("Add to Cart")
-                                    
-                                    Spacer()
-                                    
-                                    Text("$\(price)")
-                                }
-                                .font(.custom("MarkPro-Bold", size: 20))
-                                .padding(16)
-                                .padding(.horizontal)
-                                .foregroundColor(.white)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundColor(Color("Orange"))
-                                }
-                            }
+                            addToCartButton
                         }
                         .padding(.horizontal)
                         .padding(.horizontal)
@@ -202,19 +100,7 @@ struct ProductDetailsView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            presentationMode.wrappedValue.dismiss()
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .font(.custom("MarkPro-Medium", size: 20))
-                                .padding(8)
-                                .foregroundColor(.white)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundColor(Color("DarkPurple"))
-                                        .frame(width: 40, height: 40)
-                                }
-                        }
+                        BackButton(presentationMode: presentationMode)
                         .padding(.leading)
                     }
                     
@@ -224,41 +110,16 @@ struct ProductDetailsView: View {
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            showCart.toggle()
-                        } label: {
-                            ZStack(alignment: .center) {
-                                Image("bagIcon")
-                                    .resizedToFill(width: 25, height: 25)
-                                    .padding(8)
-                                    .foregroundColor(.white)
-                                    .background {
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .foregroundColor(Color("Orange"))
-                                            .frame(width: 40, height: 40)
-                                    }
-                                
-                                if !cartVM.carts.phone.isEmpty {
-                                    Text("\(cartVM.carts.totalCount)")
-                                        .font(.custom("MarkPro-Medium", size: 18))
-                                        .padding(.top, 4)
-                                        .foregroundColor(Color("DarkPurple"))
-                                }
-                            }
-                        }
+                        bagButton
                         .padding(.trailing)
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
-                .environmentObject(cartVM)
             }
             .background(Color("BackgroundColor"))
         }
         .navigationBarBackButtonHidden()
-    }
-    
-    func toString(price: Int) -> String {
-        return "$" + String(price)
+        .environmentObject(cartVM)
     }
 }
 
@@ -270,14 +131,175 @@ struct ProductDetailsView_Previews: PreviewProvider {
     }
 }
 
-extension UINavigationController: UIGestureRecognizerDelegate {
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        interactivePopGestureRecognizer?.delegate = self
+extension ProductDetailsView {
+    var favouritesButton: some View {
+        Button {
+            // favourites action
+        } label: {
+            Image(systemName: "heart")
+                .font(.custom("MarkPro-Medium", size: 18))
+                .padding(8)
+                .foregroundColor(.white)
+                .background {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("DarkPurple"))
+                }
+        }
     }
     
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
+    @ViewBuilder
+    func categoryButtons(width: CGFloat) -> some View {
+        HStack(alignment: .top) {
+            ForEach(0 ..< 3, id: \.self) { index in
+                Button {
+                    selectedButton = index
+                } label: {
+                    Text(buttonNames[index])
+                        .font(.custom("MarkPro-Bold", size: 20))
+                        .foregroundColor(selectedButton == index ? .black : .gray)
+                        .overlay(alignment: .bottom) {
+                            if selectedButton == index {
+                                Rectangle()
+                                    .frame(width: buttonNames[index].count > 5 ? width * 0.25 : width * 0.2,
+                                           height: 3)
+                                    .offset(y: 5)
+                                    .foregroundColor(Color("Orange"))
+                            }
+                        }
+                    
+                    if index != 2 {
+                        Spacer()
+                    }
+                }
+            }
+        }
+    }
+    
+    var detailsIcons: some View {
+        HStack(alignment: .center) {
+            ForEach(0 ..< 4, id: \.self) { index in
+                detailIcon(index: index)
+                
+                if index != 3 {
+                    Spacer()
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func detailIcon(index: Int) -> some View {
+        VStack(alignment: .center) {
+            Image(icons[index])
+                .resizable()
+                .scaledToFit()
+                .frame(width: 25, height: 22)
+                .padding(.bottom, 2)
+            Text(text[index])
+                .font(.custom("MarkPro", size: 11))
+        }
+        .foregroundColor(.gray)
+    }
+    
+    var colorSelecter: some View {
+        ForEach(0 ..< 2, id: \.self) { index in
+            Button {
+                colorSelected = index
+            } label: {
+                colorLabel(index: index)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func colorLabel(index: Int) -> some View {
+        ZStack(alignment: .center) {
+            Circle()
+                .foregroundColor(Color(colorButton[index]))
+                .frame(width: 40)
+            
+            if colorSelected == index {
+                Image(systemName: "checkmark")
+                    .font(.custom("MarkPro-Bold", size: 20))
+                    .foregroundColor(.white)
+            }
+        }
+    }
+    
+    var memorySelecter: some View {
+        ForEach(0 ..< 2, id: \.self) { index in
+            HStack(alignment: .center, spacing: 25) {
+                Button {
+                    memorySelected = index
+                } label: {
+                    memoryLabel(index: index)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func memoryLabel(index: Int) -> some View {
+        Text(memoryButton[index])
+            .font(.custom("MarkPro-Bold", size: 13))
+            .foregroundColor(memorySelected == index ? .white : .gray)
+            .padding(8)
+            .background {
+                if memorySelected == index {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("Orange"))
+                }
+            }
+    }
+    
+    var bagButton: some View {
+        Button {
+            showCart.toggle()
+        } label: {
+            ZStack(alignment: .center) {
+                Image("bagIcon")
+                    .resizedToFill(width: 25, height: 25)
+                    .padding(8)
+                    .foregroundColor(.white)
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("Orange"))
+                            .frame(width: 40, height: 40)
+                    }
+                
+                if !cartVM.carts.phone.isEmpty {
+                    Text("\(cartVM.carts.totalCount)")
+                        .font(.custom("MarkPro-Medium", size: 18))
+                        .padding(.top, 4)
+                        .foregroundColor(Color("DarkPurple"))
+                }
+            }
+        }
+    }
+    
+    var addToCartButton: some View {
+        Button {
+            cartVM.addToCart(itemId: itemId)
+        } label: {
+            HStack(alignment: .center) {
+                Text("Add to Cart")
+                
+                Spacer()
+                
+                Text("$\(price)")
+            }
+            .font(.custom("MarkPro-Bold", size: 20))
+            .padding(16)
+            .padding(.horizontal)
+            .foregroundColor(.white)
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(Color("Orange"))
+            }
+        }
+    }
+    
+    func toString(price: Int) -> String {
+        return "$" + String(price)
     }
 }

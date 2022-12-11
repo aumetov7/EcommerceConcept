@@ -63,6 +63,6 @@ struct PickerButton: View {
 
 struct PickerButton_Previews: PreviewProvider {
     static var previews: some View {
-        PickerButton(itemCount: 1, width: 414, height: 896, minusAction: {_ in }, plusAction: {_ in })
+        PickerButton(itemCount: 1, width: 414, height: 896, minusAction: { _ in }, plusAction: { _ in })
     }
 }

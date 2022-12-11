@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		D89EBA012945D8D800F63DBC /* SnapCarouselItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA002945D8D800F63DBC /* SnapCarouselItem.swift */; };
+		D89EBA032945DD9100F63DBC /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA022945DD9100F63DBC /* ViewExtensions.swift */; };
+		D89EBA052945DDA900F63DBC /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA042945DDA900F63DBC /* UIApplicationExtension.swift */; };
+		D89EBA072945E20200F63DBC /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA062945E20200F63DBC /* RoundedCorner.swift */; };
+		D89EBA092945E99F00F63DBC /* ExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA082945E99F00F63DBC /* ExpandedView.swift */; };
+		D89EBA0B2945EE5E00F63DBC /* PublicFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA0A2945EE5E00F63DBC /* PublicFuncs.swift */; };
+		D89EBA0D2945F29D00F63DBC /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA0C2945F29D00F63DBC /* UINavigationControllerExtension.swift */; };
+		D89EBA0F2945F77100F63DBC /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EBA0E2945F77100F63DBC /* BackButton.swift */; };
 		D8DE82BD29407C9400608129 /* HotSalesBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE82BC29407C9400608129 /* HotSalesBlockView.swift */; };
 		D8DE82C12940BA2E00608129 /* BestSellerBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE82C02940BA2E00608129 /* BestSellerBlockView.swift */; };
 		D8DE82C32940C0AF00608129 /* BestSellerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE82C22940C0AF00608129 /* BestSellerView.swift */; };
@@ -61,6 +68,13 @@
 
 /* Begin PBXFileReference section */
 		D89EBA002945D8D800F63DBC /* SnapCarouselItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselItem.swift; sourceTree = "<group>"; };
+		D89EBA022945DD9100F63DBC /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		D89EBA042945DDA900F63DBC /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
+		D89EBA062945E20200F63DBC /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		D89EBA082945E99F00F63DBC /* ExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedView.swift; sourceTree = "<group>"; };
+		D89EBA0A2945EE5E00F63DBC /* PublicFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFuncs.swift; sourceTree = "<group>"; };
+		D89EBA0C2945F29D00F63DBC /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		D89EBA0E2945F77100F63DBC /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		D8DE82BC29407C9400608129 /* HotSalesBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotSalesBlockView.swift; sourceTree = "<group>"; };
 		D8DE82C02940BA2E00608129 /* BestSellerBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerBlockView.swift; sourceTree = "<group>"; };
 		D8DE82C22940C0AF00608129 /* BestSellerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerView.swift; sourceTree = "<group>"; };
@@ -136,6 +150,7 @@
 				D8DE82EE29432DC200608129 /* Carousel.swift */,
 				D8DE82F029432E0700608129 /* Canvas.swift */,
 				D8DE82F229432E2300608129 /* Item.swift */,
+				D89EBA062945E20200F63DBC /* RoundedCorner.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -206,10 +221,12 @@
 				D8DE82C42940CE3C00608129 /* BottomBarView.swift */,
 				D8DE82C82940D87300608129 /* FilterView.swift */,
 				D8DE82CC2940E00700608129 /* FilterMenuView.swift */,
+				D89EBA082945E99F00F63DBC /* ExpandedView.swift */,
 				D8DE82D42941F73B00608129 /* RangeSliderView.swift */,
 				D8DE82DC2942342500608129 /* ProductDetailsView.swift */,
 				D8F1183D29437E7200C9033C /* MyCartView.swift */,
 				D8F118412943829600C9033C /* PickerButton.swift */,
+				D89EBA0E2945F77100F63DBC /* BackButton.swift */,
 				D8F1183C29437D2200C9033C /* CustomViews */,
 			);
 			path = View;
@@ -250,7 +267,11 @@
 			isa = PBXGroup;
 			children = (
 				D8F693E1293F700D0025FEE6 /* ImageExtension.swift */,
+				D89EBA022945DD9100F63DBC /* ViewExtensions.swift */,
+				D89EBA042945DDA900F63DBC /* UIApplicationExtension.swift */,
+				D89EBA0C2945F29D00F63DBC /* UINavigationControllerExtension.swift */,
 				D8F693F7294075130025FEE6 /* URL.swift */,
+				D89EBA0A2945EE5E00F63DBC /* PublicFuncs.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -331,6 +352,7 @@
 			files = (
 				D8F693EE294070460025FEE6 /* CarouselView.swift in Sources */,
 				D8DE82F129432E0700608129 /* Canvas.swift in Sources */,
+				D89EBA052945DDA900F63DBC /* UIApplicationExtension.swift in Sources */,
 				D8F693C2293F5AD70025FEE6 /* ContentView.swift in Sources */,
 				D8F693F6294074630025FEE6 /* ProductViewModel.swift in Sources */,
 				D8F693EA293F8BCE0025FEE6 /* SearchBarView.swift in Sources */,
@@ -342,12 +364,16 @@
 				D8DE82CD2940E00700608129 /* FilterMenuView.swift in Sources */,
 				D8FAC9082945C76A00471A32 /* DataState.swift in Sources */,
 				D89EBA012945D8D800F63DBC /* SnapCarouselItem.swift in Sources */,
+				D89EBA032945DD9100F63DBC /* ViewExtensions.swift in Sources */,
 				D8DE82DD2942342500608129 /* ProductDetailsView.swift in Sources */,
 				D8DE82D52941F73B00608129 /* RangeSliderView.swift in Sources */,
+				D89EBA092945E99F00F63DBC /* ExpandedView.swift in Sources */,
 				D8DE82C92940D87300608129 /* FilterView.swift in Sources */,
 				D8F693E2293F700D0025FEE6 /* ImageExtension.swift in Sources */,
 				D8F118422943829600C9033C /* PickerButton.swift in Sources */,
 				D8DE82E1294235B100608129 /* ProductDetailsViewModel.swift in Sources */,
+				D89EBA0B2945EE5E00F63DBC /* PublicFuncs.swift in Sources */,
+				D89EBA0F2945F77100F63DBC /* BackButton.swift in Sources */,
 				D8FAC8FC2945A68600471A32 /* Network.swift in Sources */,
 				D8DE82CB2940DACA00608129 /* CustomDisclosureGroup.swift in Sources */,
 				D8DE82EB29431E4400608129 /* SnapCarousel.swift in Sources */,
@@ -356,6 +382,7 @@
 				D8DE82C52940CE3C00608129 /* BottomBarView.swift in Sources */,
 				D8DE82C72940D5F200608129 /* CustomHalfSheetView.swift in Sources */,
 				D8FAC8FA2944B08600471A32 /* CartViewModel.swift in Sources */,
+				D89EBA072945E20200F63DBC /* RoundedCorner.swift in Sources */,
 				D8F693F42940737A0025FEE6 /* Product.swift in Sources */,
 				D8FAC9002945AF5700471A32 /* Endpoint.swift in Sources */,
 				D8F693C0293F5AD70025FEE6 /* EcommerceConceptApp.swift in Sources */,
@@ -369,6 +396,7 @@
 				D8F693DE293F675F0025FEE6 /* MainScreenView.swift in Sources */,
 				D8DE82DB2942309500608129 /* BrandViewModel.swift in Sources */,
 				D8DE82ED29432DA400608129 /* UIStateViewModel.swift in Sources */,
+				D89EBA0D2945F29D00F63DBC /* UINavigationControllerExtension.swift in Sources */,
 				D8F693E6293F87AC0025FEE6 /* Category.swift in Sources */,
 				D8DE82D72942024100608129 /* PriceViewModel.swift in Sources */,
 				D8DE82C12940BA2E00608129 /* BestSellerBlockView.swift in Sources */,
