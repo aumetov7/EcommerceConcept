@@ -31,5 +31,16 @@ struct BestSeller: Decodable, Identifiable {
 }
 
 extension Product {
-    static var product = Product(homeStore: [], bestSeller: [])
+    static var products = Product(homeStore: [HomeStore(id: 0,
+                                                        isNew: true,
+                                                        title: "",
+                                                        subtitle: "",
+                                                        picture: "",
+                                                        isBuy: true)],
+                                  bestSeller: [BestSeller(id: 0,
+                                                          isFavorites: true,
+                                                          title: "",
+                                                          priceWithoutDiscount: 0,
+                                                          discountPrice: 0,
+                                                          picture: "")])
 }

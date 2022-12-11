@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct Cart {
     var phone: [Phone]
@@ -18,7 +17,7 @@ struct Cart {
 struct Phone: Identifiable {
     let id: Int
     let title: String
-    let image: UIImage
+    let image: String
     let price: Int
     var count: Int
 }

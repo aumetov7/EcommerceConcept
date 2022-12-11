@@ -27,8 +27,6 @@ struct SearchBarView: View {
                                 }
                                 .font(.custom("MarkPro", size: 12))
                                 .accentColor(.gray)
-                            
-                            // TO-DO Background tap gestures
                         }
                         
                         if searchText.count > 0 {

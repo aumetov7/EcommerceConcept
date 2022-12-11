@@ -7,127 +7,53 @@
 
 import Foundation
 import Combine
-import UIKit
 
 class ProductViewModel: ObservableObject {
-//    @Published var product = Product.product
-    @Published var product = Product(homeStore: [HomeStore(id: 1, isNew: true, title: "", subtitle: "", picture: "", isBuy: false)], bestSeller: [])
-    @Published var hotSalesPicture = Picture(picture: [:])
-    @Published var bestSellerPicture = Picture(picture: [:])
-    @Published var imageParseDone = false
+    @Published var products: Product = Product.products
+    @Published var state: DataState = .notAvailable
+    @Published var hasError: Bool = false
     
-    private var productSubscriber = Set<AnyCancellable>()
-    private var hotSalesSubscriber = Set<AnyCancellable>()
-    private var bestSellerSubscriber = Set<AnyCancellable>()
+    private var productService: ProductServiceProtocol
+    private var subscriber = Set<AnyCancellable>()
     
-    init() {
-        getProduct(url: productURL)
+    init(productService: ProductServiceProtocol) {
+        self.productService = productService
+        
+        getProducts()
     }
     
-    func getProduct(url: URL) {
-        let dispatchGroup = DispatchGroup()
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        URLSession
-            .shared
-            .dataTaskPublisher(for: url)
+    private func getProducts() {
+        productService
+            .getProduct()
             .receive(on: DispatchQueue.main)
-            .tryMap(handleOutput)
-            .decode(type: Product.self, decoder: decoder)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
-                    print("Product error: \(error.localizedDescription)")
+                    print("Product Error: \(error.localizedDescription)")
+                    self?.state = .failed(error: error)
                 default:
-                    print("Product done")
+                    print("Product Completion Finished")
                     break
                 }
-            } receiveValue: { [weak self] product in
-                self?.product = product
-                
-                dispatchGroup.enter()
-                
-                for images in product.homeStore {
-                    self!.getProductImages(url: URL(string: images.picture)!) { image in
-                        self?.hotSalesPicture.picture[images.id] = image
-                    }
-                }
-                
-                for images in product.bestSeller {
-                    
-                    self!.getProductImagess(url: URL(string: images.picture)!) { image in
-                        self?.bestSellerPicture.picture[images.id] = image
-                    }
-                }
-                
-                dispatchGroup.leave()
-                dispatchGroup.notify(queue: .main) {
-                    self!.imageParseDone = true
-                }
+            } receiveValue: { [weak self] products in
+                self?.products = products
+                self?.state = .successfull
             }
-            .store(in: &productSubscriber)
-    }
-    
-    func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {
-        guard let response = output.response as? HTTPURLResponse,
-              response.statusCode >= 200 && response.statusCode < 300 else {
-            throw URLError(.badURL)
-        }
-        
-        return output.data
+            .store(in: &subscriber)
     }
 }
 
-// MARK: - Image Parses
-
 extension ProductViewModel {
-    func getProductImages(url: URL, completionHandler: @escaping (UIImage?) -> ()) {
-        URLSession
-            .shared
-            .dataTaskPublisher(for: url)
-            .receive(on: DispatchQueue.main)
-            .map(handleImageResponse)
-            .eraseToAnyPublisher()
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Image Error: \(error.localizedDescription)")
-                default:
-                    print("Image done")
-                    break
+    func setupErrorSubscriptions() {
+        $state
+            .map { state -> Bool in
+                switch state {
+                case .successfull, .notAvailable:
+                    return false
+                case .failed:
+                    return true
                 }
-            }, receiveValue: completionHandler)
-            .store(in: &hotSalesSubscriber)
-    }
-    
-    func getProductImagess(url: URL, completionHandler: @escaping (UIImage?) -> ()) {
-        URLSession
-            .shared
-            .dataTaskPublisher(for: url)
-            .receive(on: DispatchQueue.main)
-            .map(handleImageResponse)
-            .eraseToAnyPublisher()
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Image Error: \(error.localizedDescription)")
-                default:
-                    print("Image done")
-                    break
-                }
-            }, receiveValue: completionHandler)
-            .store(in: &bestSellerSubscriber)
-    }
-    
-    func handleImageResponse(data: Data?, response: URLResponse?) -> UIImage? {
-        guard let data = data,
-              let image = UIImage(data: data),
-              let response = response as? HTTPURLResponse,
-              response.statusCode >= 200 && response.statusCode < 300 else {
-            return nil
-        }
-        
-        return image
+            }
+            .assign(to: &$hasError)
     }
 }

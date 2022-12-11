@@ -12,8 +12,6 @@ struct MyCartView: View {
     
     @EnvironmentObject var cartVM: CartViewModel
     
-//    @ObservedObject var productDetailsVM: ProductDetailsViewModel
-    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -40,9 +38,13 @@ struct MyCartView: View {
                                                     .foregroundColor(.white)
                                                     .frame(width: geometry.size.width * 0.21, height: geometry.size.width * 0.21)
                                                 
-                                                Image(uiImage: item.image)
-                                                    .resizedToFill(width: geometry.size.width * 0.19, height: geometry.size.width * 0.19)
-                                                    .clipped()
+                                                AsyncImage(url: URL(string: item.image)) { image in
+                                                    image
+                                                        .resizedToFill(width: geometry.size.width * 0.19, height: geometry.size.width * 0.19)
+                                                        .clipped()
+                                                } placeholder: {
+                                                    ProgressView()
+                                                }
                                             }
                                             
                                             VStack(alignment: .leading) {

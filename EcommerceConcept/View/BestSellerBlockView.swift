@@ -11,7 +11,6 @@ struct BestSellerBlockView: View {
     @Binding var showProductDetails: Bool
     
     let bestSeller: BestSeller
-    let image: UIImage
     let width: CGFloat
     let height: CGFloat
     
@@ -25,9 +24,14 @@ struct BestSellerBlockView: View {
                     showProductDetails.toggle()
                 }, label: {
                     VStack(alignment: .leading) {
-                        Image(uiImage: image)
-                            .resizedToFill(width: width * 0.4, height: height * 0.3)
-                            .clipped()
+                        AsyncImage(url: URL(string: bestSeller.picture)) { image in
+                            image
+                                .resizedToFill(width: width * 0.4, height: height * 0.3)
+                                .clipped()
+                        } placeholder: {
+                            ProgressView()
+                        }
+
                         
                         HStack(alignment: .center) {
                             Text("$\(bestSeller.discountPrice)")
@@ -75,7 +79,6 @@ struct BestSellerBlockView_Previews: PreviewProvider {
                                                    priceWithoutDiscount: 1500,
                                                    discountPrice: 1407,
                                                    picture: "https://shop.gadgetufa.ru/images/upload/52534-smartfon-samsung-galaxy-s20-ultra-12-128-chernyj_1024.jpg"),
-                            image: UIImage(),
                             width: 414,
                             height: 896)
     }

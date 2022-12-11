@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HotSalesBlockView: View {
     let hotSales: HomeStore
-    let picture: UIImage
     let width: CGFloat
     let height: CGFloat
     
@@ -62,10 +61,16 @@ struct HotSalesBlockView: View {
                 
                 Spacer()
                 
-                Image(uiImage: picture)
-                    .resizedToFill(width: width * 0.45, height: height * 0.25)
-                    .cornerRadius(10, corners: [.bottomRight, .topRight])
-                    .contentShape(Rectangle())
+                AsyncImage(url: URL(string: hotSales.picture)) { image in
+                    image
+                        .resizedToFill(width: width * 0.45, height: height * 0.25)
+                        .cornerRadius(10, corners: [.bottomRight, .topRight])
+                        .contentShape(Rectangle())
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: width * 0.45, height: height * 0.25)
+
             }
             .frame(height: height * 0.25)
         }
@@ -81,7 +86,6 @@ struct HotSalesBlockView_Previews: PreviewProvider {
                                               subtitle: "Súper. Mega. Rápido.",
                                               picture: "https://img.ibxk.com.br/2020/09/23/23104013057475.jpg?w=1120&h=420&mode=crop&scale=both",
                                               isBuy: true),
-                          picture: UIImage(),
                           width: 414,
                           height: 896)
     }

@@ -10,7 +10,6 @@ import SwiftUI
 struct ProductDetailsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    
     @EnvironmentObject var uiState: UIStateViewModel
     @EnvironmentObject var cartVM: CartViewModel
     
@@ -38,7 +37,7 @@ struct ProductDetailsView: View {
                         EmptyView()
                     }
                     
-                    SnapCarousel(product: productDetailsVM,
+                    SnapCarousel(basket: productDetailsVM.products.basket,
                                  itemId: $itemId,
                                  title: $title,
                                  price: $price,
@@ -265,7 +264,7 @@ struct ProductDetailsView: View {
 
 struct ProductDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductDetailsView(productDetailsVM: ProductDetailsViewModel())
+        ProductDetailsView(productDetailsVM: ProductDetailsViewModel(productDetailsService: ProductDetailsService(network: Network())))
             .environmentObject(UIStateViewModel())
             .environmentObject(CartViewModel())
     }

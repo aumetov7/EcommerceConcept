@@ -11,13 +11,13 @@ import UIKit
 class CartViewModel: ObservableObject {
     @Published var carts: Cart = Cart.cart
     
-    let productDetailsVM = ProductDetailsViewModel()
+    let productDetailsVM = ProductDetailsViewModel(productDetailsService: ProductDetailsService(network: Network()))
     let uiState = UIStateViewModel()
     
     func addToCart(itemId: Int) {
-        for item in productDetailsVM.product.basket {
+        for item in productDetailsVM.products.basket {
             if itemId == item.id {
-                let phone = Phone(id: itemId, title: item.title, image: productDetailsVM.picture.picture[item.id] ?? UIImage(), price: item.price, count: 1)
+                let phone = Phone(id: itemId, title: item.title, image: item.images, price: item.price, count: 1)
                 let filteredCart = carts.phone.filter { $0.id == itemId }.count > 0
                 
                 if carts.phone.isEmpty {
@@ -41,11 +41,11 @@ class CartViewModel: ObservableObject {
             }
         }
         
-        carts.delivery = productDetailsVM.product.delivery
+        carts.delivery = productDetailsVM.products.delivery
     }
     
     func decrease(itemId: Int) {
-        for item in productDetailsVM.product.basket {
+        for item in productDetailsVM.products.basket {
             if itemId == item.id {
                 let filteredCart = carts.phone.filter { $0.id == itemId }.count > 0
                 
@@ -70,7 +70,7 @@ class CartViewModel: ObservableObject {
     }
     
     func removeFromCart(itemId: Int) {
-        for item in productDetailsVM.product.basket {
+        for item in productDetailsVM.products.basket {
             if itemId == item.id {
                 let filteredCart = carts.phone.filter { $0.id == itemId }.count > 0
                 

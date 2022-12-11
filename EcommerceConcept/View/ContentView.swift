@@ -12,8 +12,6 @@ struct ContentView: View {
     @ObservedObject var productDetailsVM: ProductDetailsViewModel
     
     var body: some View {
-        // add to favourites action
-        
         MainScreenView(productVM: productVM, productDetailsVM: productDetailsVM)
             .environmentObject(CartViewModel())
     }
@@ -21,6 +19,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(productVM: ProductViewModel(), productDetailsVM: ProductDetailsViewModel())
+        ContentView(productVM: ProductViewModel(productService: ProductService(network: Network())),
+                    productDetailsVM: ProductDetailsViewModel(productDetailsService: ProductDetailsService(network: Network())))
     }
 }

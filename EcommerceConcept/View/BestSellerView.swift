@@ -10,9 +10,7 @@ import SwiftUI
 struct BestSellerView: View {
     @Binding var showProductDetails: Bool
     
-    var productData: [BestSeller]
-    var pictureData: [Int: UIImage]
-    
+    let productData: [BestSeller]
     let width: CGFloat
     let height: CGFloat
     
@@ -23,7 +21,6 @@ struct BestSellerView: View {
             ForEach(productData, id: \.id) { product in
                 BestSellerBlockView(showProductDetails: $showProductDetails,
                                     bestSeller: product,
-                                    image: pictureData[product.id] ?? UIImage(),
                                     width: width,
                                     height: height)
             }
@@ -41,7 +38,6 @@ struct BestSellerView_Previews: PreviewProvider {
                                                 priceWithoutDiscount: 1500,
                                                 discountPrice: 1407,
                                                 picture: "https://shop.gadgetufa.ru/images/upload/52534-smartfon-samsung-galaxy-s20-ultra-12-128-chernyj_1024.jpg")],
-                       pictureData: [1: UIImage()],
                        width: 414,
                        height: 896)
     }

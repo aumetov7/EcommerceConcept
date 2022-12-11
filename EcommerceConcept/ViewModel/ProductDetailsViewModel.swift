@@ -7,88 +7,53 @@
 
 import Foundation
 import Combine
-import UIKit
-import SwiftUI
 
 class ProductDetailsViewModel: ObservableObject {
-    @Published var product: ProductDetails = ProductDetails.products
-    @Published var picture = Picture(picture: [:])
+    @Published var products: ProductDetails = ProductDetails.products
+    @Published var state: DataState = .notAvailable
+    @Published var hasError: Bool = false
     
-    private var productSubscriber = Set<AnyCancellable>()
-    private var imageSubscriber = Set<AnyCancellable>()
+    private var productDetailsService: ProductDetailsServiceProtocol
+    private var subscriber = Set<AnyCancellable>()
     
-    init() {
-        getProduct(url: productDetailsURL)
+    init(productDetailsService: ProductDetailsServiceProtocol) {
+        self.productDetailsService = productDetailsService
+        
+        getProducts()
     }
     
-    func getProduct(url: URL) {
-        URLSession
-            .shared
-            .dataTaskPublisher(for: url)
+    private func getProducts() {
+        productDetailsService
+            .getProduct()
             .receive(on: DispatchQueue.main)
-            .tryMap(handleOutput)
-            .decode(type: ProductDetails.self, decoder: JSONDecoder())
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
-                    print("Product Details error: \(error.localizedDescription)")
+                    print("ProductDetails Error: \(error.localizedDescription)")
+                    self?.state = .failed(error: error)
                 default:
-                    print("Product Details done")
+                    print("ProductDetails Completion Finished")
                     break
                 }
-            } receiveValue: { [weak self] product in
-                self?.product = product
-                
-                for images in product.basket {
-                    self!.getProductImages(url: URL(string: images.images)!) { image in
-                        self?.picture.picture[images.id] = image
-                    }
-                }
+            } receiveValue: { [weak self] products in
+                self?.products = products
+                self?.state = .successfull
             }
-            .store(in: &productSubscriber)
-    }
-    
-    func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {
-        guard let response = output.response as? HTTPURLResponse,
-              response.statusCode >= 200 && response.statusCode < 300 else {
-            throw URLError(.badURL)
-        }
-        
-        return output.data
+            .store(in: &subscriber)
     }
 }
-
-// MARK: - Image Parses
 
 extension ProductDetailsViewModel {
-    func getProductImages(url: URL, completionHandler: @escaping (UIImage?) -> ()) {
-        URLSession
-            .shared
-            .dataTaskPublisher(for: url)
-            .receive(on: DispatchQueue.main)
-            .map(handleImageResponse)
-            .eraseToAnyPublisher()
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Image Error: \(error.localizedDescription)")
-                default:
-                    print("Image done")
-                    break
+    func setupErrorSubscriptions() {
+        $state
+            .map { state -> Bool in
+                switch state {
+                case .successfull, .notAvailable:
+                    return false
+                case .failed:
+                    return true
                 }
-            }, receiveValue: completionHandler)
-            .store(in: &imageSubscriber)
-    }
-    
-    func handleImageResponse(data: Data?, response: URLResponse?) -> UIImage? {
-        guard let data = data,
-              let image = UIImage(data: data),
-              let response = response as? HTTPURLResponse,
-              response.statusCode >= 200 && response.statusCode < 300 else {
-            return nil
-        }
-        
-        return image
+            }
+            .assign(to: &$hasError)
     }
 }
-

@@ -107,8 +107,7 @@ struct MainScreenView: View {
                         categoryTitle(title: "Hot Sales", buttonLabel: "see more")
                             .padding(.horizontal)
                         
-                        CarouselView(productData: productVM.product.homeStore,
-                                     pictureData: productVM.hotSalesPicture.picture,
+                        CarouselView(productData: productVM.products.homeStore,
                                      width: geometry.size.width,
                                      height: geometry.size.height)
                         
@@ -116,8 +115,7 @@ struct MainScreenView: View {
                             .padding(.horizontal)
                         
                         BestSellerView(showProductDetails: $showProductDetails,
-                                       productData: productVM.product.bestSeller,
-                                       pictureData: productVM.bestSellerPicture.picture,
+                                       productData: productVM.products.bestSeller,
                                        width: geometry.size.width,
                                        height: geometry.size.height)
                         .padding(.bottom)
@@ -160,7 +158,8 @@ struct MainScreenView: View {
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenView(productVM: ProductViewModel(), productDetailsVM: ProductDetailsViewModel())
+        MainScreenView(productVM: ProductViewModel(productService: ProductService(network: Network())),
+                       productDetailsVM: ProductDetailsViewModel(productDetailsService: ProductDetailsService(network: Network())))
             .environmentObject(CartViewModel())
     }
 }
