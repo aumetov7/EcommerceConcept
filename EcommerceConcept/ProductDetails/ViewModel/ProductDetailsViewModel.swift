@@ -20,8 +20,6 @@ class ProductDetailsViewModel: ObservableObject {
         self.productDetailsService = productDetailsService
         
         getProducts()
-        
-        print("pd init")
     }
     
     private func getProducts() {
