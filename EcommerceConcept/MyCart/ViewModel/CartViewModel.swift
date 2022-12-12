@@ -15,8 +15,6 @@ class CartViewModel: ObservableObject {
     
     init(productDetails: ProductDetails) {
         self.productDetails = productDetails
-        
-        print("cvm init")
     }
     
     func addToCart(itemId: Int) {
