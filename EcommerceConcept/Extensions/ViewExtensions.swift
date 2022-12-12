@@ -14,12 +14,15 @@ extension View {
         
         return self
             .background(
-                HalfSheetHelper(sheetView: sheetView(), onEnd: onEnd, showSheet: showSheet)
+                HalfSheetHelper(sheetView: sheetView(),
+                                onEnd: onEnd,
+                                showSheet: showSheet)
             )
     }
     
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
+        clipShape( RoundedCorner(radius: radius,
+                                 corners: corners) )
     }
     
     func placeholder<Content: View>(
