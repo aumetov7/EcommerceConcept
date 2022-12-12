@@ -21,6 +21,8 @@ struct Basket: Decodable, Identifiable {
     let title: String
 }
 
+// MARK: - Static Model
+
 extension ProductDetails {
     static var products = ProductDetails(basket: [], delivery: "", id: "", total: 0)
 }

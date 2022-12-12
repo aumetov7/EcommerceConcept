@@ -97,6 +97,8 @@ struct CartBlock_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension CartBlockView {
     var checkoutButton: some View {
         Button {

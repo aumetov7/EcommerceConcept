@@ -55,6 +55,8 @@ struct RangeSliderView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension RangeSliderView {
     var leftController: some View {
         Circle()

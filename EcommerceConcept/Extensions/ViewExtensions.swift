@@ -8,6 +8,8 @@
 import SwiftUI
 
 extension View {
+    // MARK: HalfSheet Helper
+    
     func halfSheet<SheetView: View> (showSheet: Binding<Bool>,
                                      @ViewBuilder sheetView: @escaping () -> SheetView,
                                      onEnd: @escaping () -> ()) -> some View {
@@ -20,10 +22,14 @@ extension View {
             )
     }
     
+    // MARK: Different Corner Radius
+    
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius,
                                  corners: corners) )
     }
+    
+    // MARK: TextField Placeholder
     
     func placeholder<Content: View>(
         when shouldShow: Bool,

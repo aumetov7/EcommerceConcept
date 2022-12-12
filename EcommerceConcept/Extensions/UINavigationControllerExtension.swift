@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-extension UINavigationController: UIGestureRecognizerDelegate {
+// MARK: Back to previous screen by drag gesture
+
+extension UINavigationController: UIGestureRecognizerDelegate {    
     open override func viewDidLoad() {
         super.viewDidLoad()
         

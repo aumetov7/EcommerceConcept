@@ -30,6 +30,8 @@ struct BestSeller: Decodable, Identifiable {
     let picture: String
 }
 
+// MARK: - Static Model
+
 extension Product {
     static var products = Product(homeStore: [HomeStore(id: 0,
                                                         isNew: true,

@@ -51,6 +51,8 @@ struct SearchBarView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension SearchBarView {
     var xmarkButton: some View {
         Button {

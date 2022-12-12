@@ -35,6 +35,8 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
         }
     }
     
+    // MARK: Coordinator
+    
     class Coordinator: NSObject, UISheetPresentationControllerDelegate {
         var parent: HalfSheetHelper
         
@@ -48,6 +50,8 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
         }
     }
 }
+
+// MARK: CustomHostingController
 
 class CustomHostingController<Content: View>: UIHostingController<Content> {
     override func viewDidLoad() {

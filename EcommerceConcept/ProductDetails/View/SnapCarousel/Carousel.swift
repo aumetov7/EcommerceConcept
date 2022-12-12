@@ -31,6 +31,8 @@ struct Carousel<Items: View> : View {
         self.cardWidth = UIScreen.main.bounds.width - (widthOfHiddenCards * 2) - (spacing * 2)
     }
     
+    // MARK: Snap Carousel main logic
+    
     var body: some View {
         let totalCanvasWidth: CGFloat = (cardWidth * numberOfItems) + totalSpacing
         let xOffsetToShift = (totalCanvasWidth - UIScreen.main.bounds.width) / 2

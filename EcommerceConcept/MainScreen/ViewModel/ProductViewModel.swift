@@ -41,6 +41,8 @@ class ProductViewModel: ObservableObject {
     }
 }
 
+// MARK: - Error Subscriptions
+
 extension ProductViewModel {
     func setupErrorSubscriptions() {
         $state

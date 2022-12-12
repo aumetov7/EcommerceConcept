@@ -37,6 +37,8 @@ struct BottomBarView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension BottomBarView {
     var titleText: some View {
         HStack(alignment: .center) {

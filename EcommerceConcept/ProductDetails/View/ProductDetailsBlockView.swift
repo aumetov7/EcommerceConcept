@@ -91,6 +91,8 @@ struct ProductDetailsBlockView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension ProductDetailsBlockView {
     var favouritesButton: some View {
         Button {

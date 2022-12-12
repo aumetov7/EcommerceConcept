@@ -64,6 +64,8 @@ struct BestSellerBlockView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension BestSellerBlockView {
     var priceText: some View {
         HStack(alignment: .center) {

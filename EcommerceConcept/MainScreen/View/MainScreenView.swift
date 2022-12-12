@@ -105,6 +105,8 @@ struct MainScreenView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension MainScreenView {
     @ViewBuilder
     func categoryTitle(title: String, buttonLabel: String) -> some View {

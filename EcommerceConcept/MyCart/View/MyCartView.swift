@@ -61,6 +61,8 @@ struct MyCartView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension MyCartView {
     var addressButton: some View {
         HStack(alignment: .center, spacing: 2) {

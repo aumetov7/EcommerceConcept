@@ -24,6 +24,8 @@ final class Network: NetworkProtocol {
     }
 }
 
+// MARK: - Network Output Handler
+
 extension Network {
     func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {
         guard let response = output.response as? HTTPURLResponse,

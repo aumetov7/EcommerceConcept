@@ -8,6 +8,8 @@
 import SwiftUI
 
 extension Image {
+    // MARK: Resize Image
+    
     func resizedToFill(width: CGFloat, height: CGFloat) -> some View {
         self
             .resizable()

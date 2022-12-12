@@ -74,6 +74,8 @@ struct FilterView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension FilterView {
     @ViewBuilder
     func disclosureGroupPrompt(isExpanded: Bool, item: String) -> some View {

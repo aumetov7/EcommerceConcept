@@ -74,6 +74,8 @@ struct HotSalesBlockView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension HotSalesBlockView {
     var newMark: some View {
         ZStack {

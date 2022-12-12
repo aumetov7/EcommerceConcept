@@ -22,6 +22,8 @@ struct Phone: Identifiable {
     var count: Int
 }
 
+// MARK: - Static Model
+
 extension Cart {
     static var cart: Cart = Cart(phone: [],
                                  totalCount: 0,

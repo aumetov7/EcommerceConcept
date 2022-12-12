@@ -52,6 +52,8 @@ struct CartProductView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension CartProductView {
     @ViewBuilder
     func productPicture(width: CGFloat, url: String) -> some View {

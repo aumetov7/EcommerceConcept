@@ -93,6 +93,8 @@ struct ProductDetailsView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Properties
+
 extension ProductDetailsView {
     var bagButton: some View {
         Button {
