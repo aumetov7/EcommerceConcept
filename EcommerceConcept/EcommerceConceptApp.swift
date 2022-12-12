@@ -14,8 +14,18 @@ struct EcommerceConceptApp: App {
     var body: some Scene {
         WindowGroup {
             switch productVM.state {
-            case .failed, .notAvailable:
+            case .notAvailable, .failed:
                 LaunchScreen()
+                    .alert(isPresented: $productVM.hasError) {
+                        if case .failed(let error) = productVM.state {
+                            return Alert(title: Text("Error"),
+                                         message: Text(error.localizedDescription))
+                            
+                        } else {
+                            return Alert(title: Text("Error"),
+                                         message: Text("Something went wrong"))
+                        }
+                    }
             case .successfull:
                 ContentView(productVM: productVM)
             }

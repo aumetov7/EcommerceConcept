@@ -20,6 +20,7 @@ class ProductViewModel: ObservableObject {
         self.productService = productService
         
         getProducts()
+        setupErrorSubscriptions()
     }
     
     private func getProducts() {
@@ -29,11 +30,8 @@ class ProductViewModel: ObservableObject {
             .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
-                    print("Product Error: \(error.localizedDescription)")
                     self?.state = .failed(error: error)
-                default:
-                    print("Product Completion Finished")
-                    break
+                default: break
                 }
             } receiveValue: { [weak self] products in
                 self?.products = products

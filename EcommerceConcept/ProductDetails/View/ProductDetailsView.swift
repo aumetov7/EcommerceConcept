@@ -65,6 +65,16 @@ struct ProductDetailsView: View {
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
+                .alert(isPresented: $productDetailsVM.hasError) {
+                    if case .failed(let error) = productDetailsVM.state {
+                        return Alert(title: Text("Error"),
+                                     message: Text(error.localizedDescription))
+                        
+                    } else {
+                        return Alert(title: Text("Error"),
+                                     message: Text("Something went wrong"))
+                    }
+                }
             }
             .background(Color("BackgroundColor"))
         }
